@@ -4,8 +4,16 @@ Copyright:WowThemes.net,https://www.wowthemes.net
 Version:1.0.1
 License: https://www.wowthemes.net/freebies-license/
 */
+
+
+
+
+
+
+
 body {
 	padding-top:5rem;
+	background-image: url("../img/background.jpg");
 }
 .mainheading {
 	padding:1rem 0rem;
@@ -159,22 +167,25 @@ span.post-name a,span.post-read-more a:hover {
 	margin-left:3px;
 	margin-right:3px;
 }
-.mediumnavigation .form-control {
-	font-size:0.8rem;
-	border-radius:30px;
+.form-control {
+	font-size:3.8rem;
+	border-radius:50px;
 	overflow:hidden;
 	border:1px solid rgba(0,0,0,0.04);
 }
-.mediumnavigation .form-inline {
-	margin-left:15px;
+.form-inline {
+	margin:175px;
+    padding-bottom: 50px;
 }
-.mediumnavigation .form-inline .btn {
+
+.form-inline .btn {
 	margin-left:-50px;
 	border:0;
 	border-radius:30px;
 	cursor:pointer;
 }
-.mediumnavigation .form-inline .btn:hover,.mediumnavigation .form-inline .btn:active {
+
+.form-inline .btn:hover,.mediumnavigation .form-inline .btn:active {
 	background:transparent;
 	color:green;
 }
@@ -440,4 +451,12 @@ ul.tags li a:hover {
 	line-height:22px;
 	border-radius:50%;
 	font-size:12px;
+
 }
+
+/*.container {
+  background-image: url("../img/background.png");
+}*/
+
+
+
