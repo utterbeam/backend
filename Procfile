@@ -1,1 +1,1 @@
-web: gunicorn utterbeam.wsgi
+web: gunicorn uttterbeam.wsgi
