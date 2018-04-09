@@ -10,4 +10,6 @@ urlpatterns = patterns('',
     url(r'^$', 'main.views.index', name = 'index'),
     url(r'^author', 'main.views.author', name = 'author'),
     url(r'^post', 'main.views.post', name = 'post'),
+    url(r'^login', 'main.views.login', name = 'login'),
+    url(r'^upload', 'main.views.upload', name = 'upload'),
 )

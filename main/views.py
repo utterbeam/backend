@@ -11,3 +11,9 @@ def author(request):
 
 def post(request):
 	return render(request,'main/newTemplate/how-dreams-of-spacefaring-zombies-led-to-the-launch-of-sputnik/index.html')
+
+def login(request):
+	return render(request,'main/login.html')
+
+def upload(request):
+	return render(request,'main/upload.html')
