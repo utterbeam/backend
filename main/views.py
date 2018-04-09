@@ -10,4 +10,4 @@ def author(request):
 	return render(request,'main/newTemplate/author/iherzog/index.html')
 
 def post(request):
-	return render(request,'main/post.html')
+	return render(request,'main/newTemplate/how-dreams-of-spacefaring-zombies-led-to-the-launch-of-sputnik/index.html')
