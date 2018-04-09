@@ -3634,6 +3634,7 @@ html .site-logo-button {
 
 body {
   overflow: hidden;
+  position: relative;
 }
 body #site-wrap {
   height: 100vh;
@@ -3654,11 +3655,11 @@ body #site-body .site-body-content-wrap {
 }
 
 #site-menu-block {
-  height: 100vh;
+  height: 20vh;
   position: absolute;
-  top: 0;
+  top: 0px;
   left: 0;
-  z-index: 10;
+  /*z-index: 10;*/
 }
 
 html #site-wrap {

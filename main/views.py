@@ -17,3 +17,6 @@ def login(request):
 
 def upload(request):
 	return render(request,'main/upload.html')
+
+def index2(request):
+	return render(request,'main/newTemplate/index2.html')
