@@ -475,6 +475,7 @@ helpers!
 
 .padding-both-20 {
   padding: 20px;
+
 }
 
 .padding-left-30 {
@@ -2169,6 +2170,7 @@ masonry!
 /* --------------------------- */
 .widget.widget_search .screen-reader-text {
   display: none;
+  ve
 }
 .widget.widget_search input[type="search"] {
   border-radius: 3px;
@@ -2179,6 +2181,7 @@ masonry!
   background-color: #fff;
   width: 100%;
   box-sizing: border-box;
+  vertical-align: middle;
 }
 .widget.widget_search input[type="submit"] {
   display: none;
@@ -3634,7 +3637,6 @@ html .site-logo-button {
 
 body {
   overflow: hidden;
-  position: relative;
 }
 body #site-wrap {
   height: 100vh;
@@ -3655,11 +3657,11 @@ body #site-body .site-body-content-wrap {
 }
 
 #site-menu-block {
-  height: 20vh;
+  height: 100vh;
   position: absolute;
-  top: 0px;
+  top: 0;
   left: 0;
-  /*z-index: 10;*/
+  z-index: 10;
 }
 
 html #site-wrap {
