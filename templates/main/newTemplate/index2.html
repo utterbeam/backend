@@ -209,12 +209,6 @@ img.emoji {
         data-layout-sm="column"
         data-layout-xs="column"
         class="site-wrap">
-
-
-
-
-
-
         <div
         id="basic-sideheader"
         data-flex
@@ -343,8 +337,8 @@ img.emoji {
         data-flex
         data-flex-xs="none"
         data-flex-sm="none"
-        data-background-thumb="http://kohette.com/wpthemes/narratium/wp-content/uploads/2017/10/Victo-Ngai-226x300.jpg"
-        data-background-large="http://kohette.com/wpthemes/narratium/wp-content/uploads/2017/10/Victo-Ngai-772x1024.jpg"
+        data-background-thumb={{ backgroundThumb }}
+        data-background-large={{ backgroundLarge }}
         class="site-palette-yin-1-background-color position-relative basic-sideheader overflow-hidden  "
         >
 
@@ -365,9 +359,9 @@ img.emoji {
     <div>
         <a href="how-dreams-of-spacefaring-zombies-led-to-the-launch-of-sputnik/index.html" class="site-palette-yang-1-color display-block padding-both-20">
             <div class="max-width-400px margin-auto word-wrap-break-word typo-size-medium site-typeface-title padding-left-10 padding-right-10 typo-size-subtitle padding-bottom-20">
-              How <em><strong>Dreams of Spacefaring Zombies</strong></em> Led to the <span style="text-decoration: underline;">Launch</span> of Sputnik.            </div>
+              {{ heading }}            </div>
             <div class="max-width-400px margin-auto site-typeface-headline opacity-05 padding-left-10 padding-right-10 text-size-small">
-              What, you think there’s enough room on Earth for everyone who has ever lived?            </div>
+              {{ subText }}         </div>
         </a>
 
 
@@ -377,12 +371,11 @@ img.emoji {
         </div>
 
         <div data-flex class="site-typeface-body typo-size-xsmall post-item-meta padding-left-30 padding-top-5 padding-bottom-5 padding-right-30" >
-          
-              <strong class="by-user"><a class="site-palette-yang-1-color" href="author/kohette/index.html">Rafael Martín</a></strong>
+         
 
-          
-              <strong class="by-user"><a class="site-palette-yang-1-color" href="author/iwintheiser/index.html">Angie Harris</a></strong>
-
+          {% for item in author %}
+              <strong class="by-user"><a class="site-palette-yang-1-color" href="author/iwintheiser/index.html">{{ item }}</a></strong>
+          {% endfor %}
           
         </div>
 
