@@ -40,7 +40,7 @@ def index2(request):
 
     objectCount = details.objects.all().count()
     context_dict['data'] = array
-    print context_dict
+    # print context_dict
     return render(request,'main/newTemplate/index2.html',context_dict)
 
 
