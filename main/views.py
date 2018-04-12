@@ -32,11 +32,11 @@ def index2(request):
         author = ['Alex' , 'Zack']
         data['author'] = author
         array.append(data)
-        data['id'] = i.id
-        data['id2'] = "button-behaviour md-whiteframe-10dp post-item post-" + str(i.id) + " post type-post status-publish format-standard has-post-thumbnail hentry category-hacking category-internet category-technology"
-        data['id3'] = "card-post-" + str(i.id)
-        data['id4'] = "card-content site-palette-yang-1-color height-40vw width-100 min-height-500px max-height-800px link-white-color card-post site-palette-yang-1-color backdrop-dark-gradient-light ktt-backgroundy card-post-" + str(i.id) + "-content"
-        data['id5'] = "#card-post-" + str(i.id)
+        data['id'] = i.idd
+        data['id2'] = "button-behaviour md-whiteframe-10dp post-item post-" + str(i.idd) + " post type-post status-publish format-standard has-post-thumbnail hentry category-hacking category-internet category-technology"
+        data['id3'] = "card-post-" + str(i.idd)
+        data['id4'] = "card-content site-palette-yang-1-color height-40vw width-100 min-height-500px max-height-800px link-white-color card-post site-palette-yang-1-color backdrop-dark-gradient-light ktt-backgroundy card-post-" + str(i.idd) + "-content"
+        data['id5'] = "#card-post-" + str(i.idd)
 
     objectCount = details.objects.all().count()
     context_dict['data'] = array
@@ -46,8 +46,8 @@ def index2(request):
 
 
 def enterData(request):
-    id = 5
-    newInstance = details.objects.get_or_create(id = id)[0]
+    idd = '3'
+    newInstance = details.objects.get_or_create(idd = idd)[0]
     newInstance.heading = 'Bad Day'
     newInstance.imageUrl = "http://images.mentalfloss.com/sites/default/files/styles/mf_image_16x9/public/522639-istock-154932729.jpg?itok=W38uZs2Y&resize=1100x619"
     newInstance.subText = "In the 14 years he spent planning the monument, artist Gutzon Borglum harbored a deep concern"
