@@ -47,7 +47,7 @@ def index2(request):
 
 
 def enterData(request):
-    idd = '11'
+    idd = '15'
     newInstance = details.objects.get_or_create(idd = idd)[0]
     newInstance.heading = 'Bad Day'
     newInstance.imageUrl = "http://images.mentalfloss.com/sites/default/files/styles/mf_image_16x9/public/522639-istock-154932729.jpg?itok=W38uZs2Y&resize=1100x619"
