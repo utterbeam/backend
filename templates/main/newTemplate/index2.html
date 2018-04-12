@@ -299,14 +299,14 @@ img.emoji {
 	<div class="site-body-content-wrap min-height-100vh " data-flex data-layout="row" data-layout-wrap data-layout-align="center center">
 
       
-
+{% for item in data %}
   		<div
           data-layout="row"
           data-layout-xs="column"
           data-layout-sm="column"
           data-layout-align="end stretch"
-          id="112"
-            class=" button-behaviour md-whiteframe-10dp post-item post-112 post type-post status-publish format-standard has-post-thumbnail hentry category-hacking category-internet category-technology"
+          id={{ item.id }}
+            class= {{ id2 }}
 
 
                           data-flex="33"
@@ -320,12 +320,12 @@ img.emoji {
 
 
         <div
-        id="card-post-112"
+        id={{ id3 }}
         data-flex
         data-flex-xs="none"
         data-flex-sm="none"
-        data-background-thumb={{ backgroundThumb }}
-        data-background-large={{ backgroundLarge }}
+        data-background-thumb={{ item.backgroundThumb }}
+        data-background-large={{ item.backgroundLarge }}
         class="site-palette-yin-1-background-color position-relative basic-sideheader overflow-hidden  "
         >
 
@@ -334,7 +334,7 @@ img.emoji {
             <div                        style="position:relative;z-index:10;"
             data-layout-align="end stretch"
             data-layout="column"
-            class="card-content site-palette-yang-1-color height-40vw width-100 min-height-500px max-height-800px link-white-color card-post site-palette-yang-1-color backdrop-dark-gradient-light ktt-backgroundy card-post-112-content"
+            class={{ id4 }}
             >
 
                 
@@ -346,9 +346,9 @@ img.emoji {
     <div>
         <a href="how-dreams-of-spacefaring-zombies-led-to-the-launch-of-sputnik/index.html" class="site-palette-yang-1-color display-block padding-both-20">
             <div class="max-width-400px margin-auto word-wrap-break-word typo-size-medium site-typeface-title padding-left-10 padding-right-10 typo-size-subtitle padding-bottom-20">
-              {{ heading }}            </div>
+             {{ item.heading }}   </div>
             <div class="max-width-400px margin-auto site-typeface-headline opacity-05 padding-left-10 padding-right-10 text-size-small">
-              {{ subText }}         </div>
+              {{ item.subText }}         </div>
         </a>
 
 
@@ -360,8 +360,8 @@ img.emoji {
         <div data-flex class="site-typeface-body typo-size-xsmall post-item-meta padding-left-30 padding-top-5 padding-bottom-5 padding-right-30" >
          
 
-          {% for item in author %}
-              <strong class="by-user"><a class="site-palette-yang-1-color" href="author/iwintheiser/index.html">{{ item }}</a></strong>
+          {% for a in item.author %}
+              <strong class="by-user"><a class="site-palette-yang-1-color" href="author/iwintheiser/index.html">{{ a }}</a></strong>
           {% endfor %}
           
         </div>
@@ -410,11 +410,17 @@ img.emoji {
 
         <script>
         jQuery( document ).ready(function() {
-            jQuery( "#card-post-112" ).ktt_backgroundy();
+            jQuery( {{ id5 }} ).ktt_backgroundy();
         });
         </script>
 
-  </div><div
+  </div>
+{% endfor %}
+
+
+
+
+  <div
           data-layout="row"
           data-layout-xs="column"
           data-layout-sm="column"

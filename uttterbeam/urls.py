@@ -13,4 +13,6 @@ urlpatterns = patterns('',
     url(r'^login', 'main.views.login', name = 'login'),
     url(r'^upload', 'main.views.upload', name = 'upload'),
     url(r'^logged_in', 'main.views.index', name = 'index'),
+    url(r'^enterData', 'main.views.enterData', name = 'enterData'),
+
 )

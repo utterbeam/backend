@@ -1,30 +1,72 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from main.models import details
 
 # Create your views here.
 
 def index(request):
-	return render(request,'main/newTemplate/index.html')
+    return render(request,'main/newTemplate/index.html')
 
 def author(request):
-	return render(request,'main/newTemplate/author/iherzog/index.html')
+    return render(request,'main/newTemplate/author/iherzog/index.html')
 
 def post(request):
-	return render(request,'main/newTemplate/how-dreams-of-spacefaring-zombies-led-to-the-launch-of-sputnik/index.html')
+    return render(request,'main/newTemplate/how-dreams-of-spacefaring-zombies-led-to-the-launch-of-sputnik/index.html')
 
 def login(request):
-	return render(request,'main/login.html')
+    return render(request,'main/login.html')
 
 def upload(request):
-	return render(request,'main/upload.html')
+    return render(request,'main/upload.html')
 
 def index2(request):
-	context_dict = {}
-	context_dict['backgroundThumb'] = "http://kohette.com/wpthemes/narratium/wp-content/uploads/2017/10/Victo-Ngai-226x300.jpg"
-	context_dict['backgroundLarge'] = "http://kohette.com/wpthemes/narratium/wp-content/uploads/2017/10/Victo-Ngai-772x1024.jpg"
-	context_dict['heading'] = "The biggest lie about the future is that it's going to look much different from today."
-	context_dict['subText'] = "What the Near Future Is Actually Going to Look Like."
-	author = ['Alex' , 'Zack']
-	context_dict['author'] = author
-	print context_dict
-	return render(request,'main/newTemplate/index2.html',context_dict)
+    dataInfo = details.objects.all()
+    context_dict = {}
+    array = []
+    for i in dataInfo:
+        data = {}
+        data['backgroundThumb'] = i.imageUrl
+        data['backgroundLarge'] = i.imageUrl
+        data['heading'] = i.heading
+        data['subText'] = i.subText
+        author = ['Alex' , 'Zack']
+        data['author'] = author
+        array.append(data)
+        data['id'] = i.id
+        data['id2'] = "button-behaviour md-whiteframe-10dp post-item post-" + str(i.id) + " post type-post status-publish format-standard has-post-thumbnail hentry category-hacking category-internet category-technology"
+        data['id3'] = "card-post-" + str(i.id)
+        data['id4'] = "card-content site-palette-yang-1-color height-40vw width-100 min-height-500px max-height-800px link-white-color card-post site-palette-yang-1-color backdrop-dark-gradient-light ktt-backgroundy card-post-" + str(i.id) + "-content"
+        data['id5'] = "#card-post-" + str(i.id)
+
+    objectCount = details.objects.all().count()
+    context_dict['data'] = array
+    return render(request,'main/newTemplate/index2.html',context_dict)
+
+
+
+
+def enterData(request):
+    id = 5
+    newInstance = details.objects.get_or_create(id = id)[0]
+    newInstance.heading = 'Bad Day'
+    newInstance.imageUrl = "http://images.mentalfloss.com/sites/default/files/styles/mf_image_16x9/public/522639-istock-154932729.jpg?itok=W38uZs2Y&resize=1100x619"
+    newInstance.subText = "In the 14 years he spent planning the monument, artist Gutzon Borglum harbored a deep concern"
+    newInstance.save()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
