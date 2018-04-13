@@ -34,17 +34,20 @@ img.emoji {
 </style>
 
 <style>
-    li {
-        
-        display: -moz-inline-stack;
-        display: inline-block;
+    ul {
+ -webkit-column-gap: 0px; /* Chrome, Safari, Opera */
+    -moz-column-gap: 0px; /* Firefox */
+    column-gap: 0px;   
+    -webkit-columns: 3; /* Chrome, Safari, Opera */
+    -moz-columns:  3; /* Firefox */
+    columns:  3;
 
-        vertical-align: top; 
-        *display: inline;
-        /*width: 30%;*/
 
         
     }
+    li {
+    break-inside: avoid-column;
+}
 </style>
 
 <link rel='stylesheet' id='ktt_-angular-material.min-css'  href="{% static 'assetsNew/wp-content/themes/narratium/assets/stylesheets/angular-material.min55fe.css?ver=4.9.5' %}" type='text/css' media='all' />
@@ -242,7 +245,7 @@ img.emoji {
 	<ul class = "list" style="margin: 0; padding: 0;">
 {% for item in data %}
 
-	<li>
+	<li >
   		<div
           data-layout="row"
           data-layout-xs="column"
