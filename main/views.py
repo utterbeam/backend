@@ -49,21 +49,21 @@ def index2(request):
 
 
 def uploadWriteup(request):
-    print request.FILES
+    # print request.FILES
     client_id = 'ad3002cdda698d8'
     headers = {"Authorization": "Client-ID %s"%(client_id)}
-    print headers
+    # print headers
     #file = cStringIO.StringIO(base64.b64decode(request.FILES['file1']))
     api_key = '37ee388bf32de161bb82e3852124c0af4ae40f19'
 
     newInstance = details.objects.get_or_create(idd = uuid().hex)[0]
 
     writeup = request.POST['comment']
-    print writeup
+    # print writeup
     newInstance.writeup = writeup
     
     heading = request.POST['author']
-    print heading
+    # print heading
     newInstance.heading = heading
     
     url = "https://api.imgur.com/3/upload.json"
@@ -83,10 +83,9 @@ def uploadWriteup(request):
     )
     # print j1
     img = json.loads(j1.text)["data"]["link"]
-    print img
+    # print img
     newInstance.imageUrl = img
     newInstance.save()
-
     return HttpResponse("your file was uploaded successfully")
             
 
