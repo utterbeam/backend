@@ -468,10 +468,10 @@ img.emoji {
 
               
                    <div id="respond" class="comment-respond">
-		<h3 id="reply-title" class="comment-reply-title">Post your writeups <small><a rel="nofollow" id="cancel-comment-reply-link" href="index.html#respond" style="display:none;">Cancel reply</a></small></h3>			<form action="http://kohette.com/wpthemes/narratium/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate>
-
+		<h3 id="reply-title" class="comment-reply-title">Post your writeups <small><a rel="nofollow" id="cancel-comment-reply-link" href="index.html#respond" style="display:none;">Cancel reply</a></small></h3>			<form action="/uploadWriteup" method="post" id="commentform" enctype="multipart/form-data" class="comment-form" novalidate>
+{% csrf_token %}
 <p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p><p class="comment-form-comment"><textarea class="site-palette-yin-2-color site-palette-yang-1-background-color border-radius-3 display-block width-100 padding-both-20" placeholder="Start typing" id="comment" name="comment" cols="45" rows="25" aria-required="true"></textarea></p>
-				<span class="display-block"><p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="60" maxlength="245" required='required' /></p></span>
+				<span class="display-block"><p class="comment-form-author"><label for="author"> Heading <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="60" maxlength="245" required='required' /></p></span>
 
 			<!-- <span class="display-block"><p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" required='required' /></p></span> -->
 			<span class="display-block"><p class="comment-form-email"><label for="email">Upload a picture for your writeup</span></label> <input id="file" name="file" type="file" value=""  /></p></span>

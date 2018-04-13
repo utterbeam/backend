@@ -1,6 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from main.models import details
+import base64
+import json
+import requests
+from uuid import uuid4 as uuid
 
 # Create your views here.
 
@@ -44,17 +48,47 @@ def index2(request):
     return render(request,'main/newTemplate/index2.html',context_dict)
 
 
+def uploadWriteup(request):
+    print request.FILES
+    client_id = 'ad3002cdda698d8'
+    headers = {"Authorization": "Client-ID %s"%(client_id)}
+    print headers
+    #file = cStringIO.StringIO(base64.b64decode(request.FILES['file1']))
+    api_key = '37ee388bf32de161bb82e3852124c0af4ae40f19'
 
+    newInstance = details.objects.get_or_create(idd = uuid().hex)[0]
 
-def enterData(request):
-    idd = '15'
-    newInstance = details.objects.get_or_create(idd = idd)[0]
-    newInstance.heading = 'Bad Day'
-    newInstance.imageUrl = "http://images.mentalfloss.com/sites/default/files/styles/mf_image_16x9/public/522639-istock-154932729.jpg?itok=W38uZs2Y&resize=1100x619"
-    newInstance.subText = "In the 14 years he spent planning the monument, artist Gutzon Borglum harbored a deep concern"
+    writeup = request.POST['comment']
+    print writeup
+    newInstance.writeup = writeup
+    
+    heading = request.POST['author']
+    print heading
+    newInstance.heading = heading
+    
+    url = "https://api.imgur.com/3/upload.json"
+    image = request.FILES.get('file', None)
+    encoded_string = base64.b64encode(image.read())
+
+    j1 = requests.post(
+        url, 
+        headers = headers,
+        data = {
+            'key': api_key, 
+            'image': encoded_string,
+            'type': 'base64',
+            'name': '1.jpg',
+            'title': 'Picture no. 1'
+        }
+    )
+    # print j1
+    img = json.loads(j1.text)["data"]["link"]
+    print img
+    newInstance.imageUrl = img
     newInstance.save()
 
-
+    return HttpResponse("your file was uploaded successfully")
+            
 
 
 
