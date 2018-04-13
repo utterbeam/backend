@@ -56,7 +56,11 @@ def uploadWriteup(request):
     #file = cStringIO.StringIO(base64.b64decode(request.FILES['file1']))
     api_key = '37ee388bf32de161bb82e3852124c0af4ae40f19'
 
-    newInstance = details.objects.get_or_create(idd = uuid().hex)[0]
+
+    ids = details.objects.all().order_by('id')
+    # print max(ids)
+    idd = int(str(max(ids))) + 1
+    newInstance = details.objects.get_or_create(idd = str(idd))[0]
 
     writeup = request.POST['comment']
     # print writeup
