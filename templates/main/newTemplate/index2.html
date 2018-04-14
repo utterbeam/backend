@@ -35,8 +35,62 @@ img.emoji {
 
 <style>
 /* Extra small devices (phones, 600px and down) */
-
+@media only screen and (max-width: 600px) {
     ul {
+ -webkit-column-gap: 0px; /* Chrome, Safari, Opera */
+    -moz-column-gap: 0px; /* Firefox */
+    column-gap: 0px;   
+    -webkit-columns: 1; /* Chrome, Safari, Opera */
+    -moz-columns:  1; /* Firefox */
+    columns:  1;
+
+
+        
+    }
+    li {
+    break-inside: avoid-column;
+}
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    ul {
+ -webkit-column-gap: 0px; /* Chrome, Safari, Opera */
+    -moz-column-gap: 0px; /* Firefox */
+    column-gap: 0px;   
+    -webkit-columns: 2; /* Chrome, Safari, Opera */
+    -moz-columns:  2; /* Firefox */
+    columns:  2;
+
+
+        
+    }
+    li {
+    break-inside: avoid-column;
+}
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+     ul {
+ -webkit-column-gap: 0px; /* Chrome, Safari, Opera */
+    -moz-column-gap: 0px; /* Firefox */
+    column-gap: 0px;   
+    -webkit-columns: 2; /* Chrome, Safari, Opera */
+    -moz-columns:  2; /* Firefox */
+    columns:  2;
+
+
+        
+    }
+    li {
+    break-inside: avoid-column;
+}
+} 
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+     ul {
  -webkit-column-gap: 0px; /* Chrome, Safari, Opera */
     -moz-column-gap: 0px; /* Firefox */
     column-gap: 0px;   
@@ -50,10 +104,25 @@ img.emoji {
     li {
     break-inside: avoid-column;
 }
+} 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+     ul {
+ -webkit-column-gap: 0px; /* Chrome, Safari, Opera */
+    -moz-column-gap: 0px; /* Firefox */
+    column-gap: 0px;   
+    -webkit-columns: 3; /* Chrome, Safari, Opera */
+    -moz-columns:  3; /* Firefox */
+    columns:  3;
 
 
-/* Small devices (portrait tablets and large phones, 600px and up) */
-
+        
+    }
+    li {
+    break-inside: avoid-column;
+}
+}
    
 </style>
 
