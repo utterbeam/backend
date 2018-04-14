@@ -3743,7 +3743,7 @@ html #site-wrap.overlay-open::after {
 }
 
 .button-behaviour:hover {
-  opacity: 0.9;
+  opacity: 1;
 }
 .button-behaviour.md-whiteframe-2dp:hover {
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
