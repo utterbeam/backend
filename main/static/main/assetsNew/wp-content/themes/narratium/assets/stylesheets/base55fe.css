@@ -1584,7 +1584,7 @@ html .font-white-color * {
   /* --- */
 }
 .button-behaviour:hover {
-  opacity: 0.9;
+  opacity: 1;
 }
 .button-behaviour:active {
   transform: scale(0.98);
