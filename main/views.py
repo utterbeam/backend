@@ -14,8 +14,14 @@ def index(request):
 def author(request):
     return render(request,'main/newTemplate/author/iherzog/index.html')
 
-def post(request):
-    return render(request,'main/newTemplate/how-dreams-of-spacefaring-zombies-led-to-the-launch-of-sputnik/index.html')
+def post(request,uid):
+    i = details.objects.get_or_create(idd = uid)[0]
+    context_dict = {}
+    context_dict['backgroundThumb'] = i.imageUrl
+    context_dict['heading'] = i.heading
+    context_dict['subText'] = i.subText
+    context_dict['writeup'] = i.writeup
+    return render(request,'main/newTemplate/story/index.html',context_dict)
 
 def login(request):
     return render(request,'main/login.html')
@@ -31,6 +37,7 @@ def index2(request):
         data = {}
         data['backgroundThumb'] = i.imageUrl
         data['backgroundLarge'] = i.imageUrl
+        data['url'] = "post/" + str(i.idd)
         data['heading'] = i.heading
         data['subText'] = i.subText
         author = ['Alex' , 'Zack']

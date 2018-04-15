@@ -9,7 +9,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="profile" href="http://gmpg.org/xfn/11">
-        <title>How Dreams of Spacefaring Zombies Led to the Launch of Sputnik. &#8211; Narratium</title>
+        <title>{{ heading }}.</title>
 <link rel='dns-prefetch' href='http://fonts.googleapis.com/' />
 <link rel='dns-prefetch' href='http://s.w.org/' />
 <link rel="alternate" type="application/rss+xml" title="Narratium &raquo; Feed" href="../feed/index.html" />
@@ -184,7 +184,7 @@ img.emoji {
             href="index.html"
             alt="How Dreams of Spacefaring Zombies Led to the Launch of Sputnik."
             title="How Dreams of Spacefaring Zombies Led to the Launch of Sputnik."
-            class="classic-link display-block text-size-small font-weight-700">How Dreams of Spacefaring Zombies Led to the Launch of Sputnik.</a>
+            class="classic-link display-block text-size-small font-weight-700">{{ heading }}</a>
 
             <div data-flex class=" item-meta site-palette-yin-4-color post-item-meta classic-link-inside text-size-2xsmall padding-top-5">
 
@@ -398,8 +398,8 @@ img.emoji {
         data-flex
         data-flex-xs="none"
         data-flex-sm="none"
-        data-background-thumb="{% static 'assetsNew/wp-content/uploads/2017/10/Victo-Ngai-226x300.jpg' %}"
-        data-background-large="{% static 'assetsNew/wp-content/uploads/2017/10/Victo-Ngai-772x1024.jpg' %}"
+        data-background-thumb={{ backgroundThumb }}
+        data-background-large={{ backgroundThumb }}
         class="max-width-400px basic-sideheader overflow-hidden site-palette-yin-1-background-color"
         >
 
@@ -419,9 +419,9 @@ img.emoji {
     <div  class="typography-responsive site-palette-yang-1-color width-100 display-block padding-both-20 padding-left-50 padding-right-50">
 
             <div class="word-wrap-break-word  site-typeface-title text-size-2xlarge  padding-bottom-20">
-              How <em><strong>Dreams of Spacefaring Zombies</strong></em> Led to the <span style="text-decoration: underline;">Launch</span> of Sputnik.            </div>
+              <em><strong>{{ heading }}</strong></em>         </div>
             <div class="word-wrap-break-word  site-typeface-headline opacity-08 text-size-basic padding-bottom-20  ">
-              What, you think there’s enough room on Earth for everyone who has ever lived?            </div>
+              {{ subText }}           </div>
 
             <div data-flex class="item-meta post-item-meta classic-link-inside typo-size-xsmall padding-bottom-40">
 
@@ -551,33 +551,11 @@ img.emoji {
 			
 		</style>
 		
-<p style="color:#313131;font-size:24px" class="has-drop-cap">Early on a Saturday morning 60 years ago, the millennia-old dream of spaceflight came true as Sputnik 1 rocketed into orbit to become Earth&#x27;s first human-made satellite. The mission notoriously shocked the world and minted a new era of human exploration, but what&#x27;s less well-known is that Sputnik arose, in part, from a 19th century dream to raise the dead. Really.</p>
+<p style="color:#313131;font-size:24px" class="has-drop-cap">{{ writeup }}</p>
 
 
 
-<p style="background-color:#0693e3;color:#eee" class="has-background">On this day in 1957, the 184-pound spacecraft departed from a modest Kazakh launchpad that would later evolve into the famous Baikonur Cosmodrome, currently the only spaceport on Earth capable of transporting humans to the International Space Station (ISS). The local time of liftoff was 1:28 AM on October 5, but for people living in North American, European, and Western Russian time zones, the launch occurred on Friday, October 4, and history has memorialized that date as Sputnik&#x27;s anniversary.</p>
 
-
-
-<p>Sputnik triggered the Space Race, a geopolitically intense and technologically productive phase of the Cold War, which climaxed with NASA&#x27;s six Apollo Moon landings from 1969 to 1972. The Sputnik crisis, <a href="http://www.pbs.org/wgbh/nova/space/sputnik-impact-on-america.html">a period of Western anxiety</a>about the clear Soviet lead in spaceflight—and its reconnaissance and military implications—jumpstarted American defense, science, and education initiatives that profoundly impacted the course of world events over the subsequent six decades.</p>
-
-
-
-<ul class="wp-block-gallery alignnone columns-2 is-cropped margin-top-40 margin-bottom-40">
-    <li class="blocks-gallery-item">
-        <figure><img src="{% static 'assetsNew/wp-content/uploads/2014/07/6927690315_6a94b69af9_o.jpg' %}" alt="" data-id="448" /></figure>
-    </li>
-    <li class="blocks-gallery-item">
-        <figure><img src="{% static 'assetsNew/wp-content/uploads/2014/07/5686276085_7056693245_o.jpg' %}" alt="" data-id="447" /></figure>
-    </li>
-    <li class="blocks-gallery-item">
-        <figure><img src="{% static 'assetsNew/wp-content/uploads/2014/07/5348061775_4e15cf62d2_o.jpg' %}" alt="" data-id="446" /></figure>
-    </li>
-</ul>
-
-
-
-<p>This explains why the satellite&#x27;s flight is usually framed as the starting shot of a new era, syncing up with the &quot;space race&quot; metaphor. Sputnik is remembered for the world it made, not the world that made it. But the run-up to this mission is as fascinating as its fallout, and weaves together the stories of visionary thinkers against the tumultuous backdrop of imperial Russia&#x27;s transition into the communist USSR.</p>
 
 
 
@@ -585,38 +563,8 @@ img.emoji {
 
 
 
-<div class="wp-block-text-columns alignundefined columns-2 text-align-left">
-    <div class="wp-block-column">
-        <p>As a bonus, if you trace Sputnik&#x27;s origins back far enough, you get spacefaring zombies. It turns out that resurrecting dead people, and sending them to colonize alien planets, was a motivating factor in the development of Russian spaceflight. It began with the futurist philosopher Nikolai Fyodorov (often anglicized as &quot;Fedorov&quot;), who was born in 1829 in the Tambov province of imperial Russia.</p>
-    </div>
-    <div class="wp-block-column">
-        <p>Fyodorov believed that humanity needed to be liberated from death to achieve perfection, a view shaped by his Russian Orthodox Christian faith, especially its resurrection stories. Like other transhumanists who have envisioned immortality, Fyodorov speculated about ways to extend lifespans indefinitely, but he also took the premise a lot farther.</p>
-    </div>
-</div>
 
 
-
-<hr class="wp-block-separator" />
-
-
-
-<p>As a bonus, if you trace Sputnik&#x27;s origins back far enough, you get spacefaring zombies. It turns out that resurrecting dead people, and sending them to colonize alien planets, was a motivating factor in the development of Russian spaceflight. It began with the futurist philosopher Nikolai Fyodorov (often anglicized as &quot;Fedorov&quot;), who was born in 1829 in the Tambov province of imperial Russia.</p>
-
-
-
-<p>Fyodorov believed that humanity needed to be liberated from death to achieve perfection, a view shaped by his Russian Orthodox Christian faith, especially its resurrection stories. Like other transhumanists who have envisioned immortality, Fyodorov speculated about ways to extend lifespans indefinitely, but he also took the premise a lot farther.</p>
-
-
-
-<p>It wasn&#x27;t enough to prevent the death of every living person. Every dead person also had to be brought back to life so they could rejoin their descendents in a utopian future. He called this mission humanity&#x27;s &quot;common task.&quot;</p>
-
-
-
-<p>In other words, Fyodorov believed that &quot;humanity&#x27;s moral task was to emulate Christ and make bodily resurrection possible,&quot; writes Asif Siddiqi, a space historian based at Fordham University, <a href="https://www.amazon.com/Red-Rockets-Glare-Spaceflight-Imagination/dp/1107639328">in his book</a> <em>The Red Rockets&#x27; Glare.</em> &quot;Mass resurrection would finally eliminate the artificial boundaries among the &#x27;brotherhood&#x27; of humanity, that is, between the previous and current generations.&quot;</p>
-
-
-
-<hr class="wp-block-separator" />
 
 
 
@@ -733,9 +681,7 @@ img.emoji {
 				<div class="comment-content">
 					<p>Qui sequi veniam laboriosam nulla architecto. Ipsam aperiam impedit nobis magnam iste.</p>
 <p>Et voluptas id reprehenderit. Labore qui molestiae ut et. Tempore perspiciatis vel consequuntur tempore. Cupiditate adipisci ex veritatis explicabo dolorem.</p>
-<p>Suscipit dicta qui maiores et tenetur enim ipsum. Error odio unde culpa iusto.</p>
-<p>Sint et beatae nisi autem consequatur dolor earum. Eaque in deserunt aspernatur molestiae laboriosam voluptatum. Aut velit illo minima.</p>
-<p>Reiciendis autem voluptas aut distinctio veritatis officiis adipisci. Vero facilis maiores eos et et quisquam. Aut qui nulla minus quibusdam.</p>
+
 				</div><!-- .comment-content -->
 
 							</article><!-- .comment-body -->
@@ -759,12 +705,7 @@ img.emoji {
 					<p>Eveniet modi enim beatae est voluptatum. Debitis id cupiditate rerum voluptates accusamus velit eius.</p>
 <p>Libero omnis voluptatem ratione cum id vero soluta. Et rem tempora quisquam sunt in vero.</p>
 <p>Aut unde est id et. Modi vitae quasi expedita est. Voluptate minus consequuntur culpa atque et consequuntur. Corporis libero at quia ut. Odio et accusamus perspiciatis.</p>
-<p>Pariatur et sed aspernatur nihil minus. Et occaecati eum harum aut officiis aliquid corrupti aut. Cupiditate facere esse autem assumenda doloribus. Ut qui tempore deleniti a ipsum aut quo.</p>
-<p>Animi et similique dolores quasi. Odio nostrum ut qui quas pariatur. Minus vitae et rerum possimus.</p>
-<p>Est dolor ab porro aut fugiat et. Ut dolores recusandae aliquid beatae hic. Ea natus dolore quia ut aliquam ipsum soluta voluptatibus.</p>
-<p>Aperiam praesentium aut fuga autem. Vel ut qui nulla et itaque aspernatur. Nulla atque voluptatum quas cum officia consequatur. Neque ipsa rem nihil explicabo facere quam occaecati.</p>
-<p>Ipsum enim culpa voluptatem unde esse voluptatem. Ipsa et et voluptatibus iusto. Ratione in laborum ut nemo autem aut ut.</p>
-<p>Dolor voluptas quia dolores sequi. Qui explicabo et quo esse sint. Perferendis quo blanditiis sequi eos aut hic aut in. Dicta vitae molestiae voluptatem velit deserunt itaque.</p>
+
 				</div><!-- .comment-content -->
 
 							</article><!-- .comment-body -->
