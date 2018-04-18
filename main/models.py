@@ -3,6 +3,7 @@ from django.db import models
 # Create your models here.
 
 class details(models.Model):
+    uid = models.CharField(max_length = 150 , blank = True , null = True)
     idd = models.CharField(max_length = 150 , blank = True , null = True)
     heading = models.CharField(max_length = 150 , blank = True , null = True)
     subText = models.CharField(max_length = 150 , blank = True , null = True)

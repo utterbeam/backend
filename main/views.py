@@ -5,6 +5,8 @@ import base64
 import json
 import requests
 from uuid import uuid4 as uuid
+from slugify import slugify
+
 
 # Create your views here.
 
@@ -15,7 +17,8 @@ def author(request):
     return render(request,'main/newTemplate/author/iherzog/index.html')
 
 def post(request,uid):
-    i = details.objects.get_or_create(idd = uid)[0]
+    print uid
+    i = details.objects.get_or_create(uid = uid)[0]
     context_dict = {}
     context_dict['backgroundThumb'] = i.imageUrl
     context_dict['heading'] = i.heading
@@ -37,7 +40,7 @@ def index2(request):
         data = {}
         data['backgroundThumb'] = i.imageUrl
         data['backgroundLarge'] = i.imageUrl
-        data['url'] = "post/" + str(i.idd)
+        data['url'] = "post/" + str(i.uid)
         data['heading'] = i.heading
         data['subText'] = i.subText
         author = ['Alex' , 'Zack']
@@ -76,6 +79,11 @@ def uploadWriteup(request):
     heading = request.POST['author']
     # print heading
     newInstance.heading = heading
+
+    urlText = str(heading).strip() + '-' + str(idd)
+    url = slugify(urlText)
+    newInstance.uid = url
+
     
     url = "https://api.imgur.com/3/upload.json"
     image = request.FILES.get('file', None)
@@ -99,6 +107,9 @@ def uploadWriteup(request):
     newInstance.save()
     return HttpResponse("your file was uploaded successfully")
             
+
+
+
 
 
 
