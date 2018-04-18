@@ -17,7 +17,6 @@ def author(request):
     return render(request,'main/newTemplate/author/iherzog/index.html')
 
 def post(request,uid):
-    print uid
     i = details.objects.get_or_create(uid = uid)[0]
     context_dict = {}
     context_dict['backgroundThumb'] = i.imageUrl
@@ -83,7 +82,6 @@ def uploadWriteup(request):
     urlText = str(heading).strip() + '-' + str(idd)
     url = slugify(urlText)
     newInstance.uid = url
-
     
     url = "https://api.imgur.com/3/upload.json"
     image = request.FILES.get('file', None)
