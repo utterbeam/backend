@@ -13,3 +13,13 @@ class details(models.Model):
 
     def __str__(self):
         return self.idd
+
+
+class author(models.Model):
+    name = models.CharField(max_length = 150 , blank = True , null = True)
+    heading = models.CharField(max_length = 150 , blank = True , null = True)
+    imageUrl = models.CharField(max_length = 200 , blank = True , null = True)
+  
+
+    def __str__(self):
+        return self.name

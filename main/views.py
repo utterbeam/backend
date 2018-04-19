@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from main.models import details
+from main.models import details , author
 import base64
 import json
 import requests
@@ -13,8 +13,13 @@ from slugify import slugify
 def index(request):
     return render(request,'main/newTemplate/index.html')
 
-def author(request):
-    return render(request,'main/newTemplate/author/iherzog/index.html')
+def authorF(request,name):
+    i = author.objects.get_or_create(name = name)[0]
+    context_dict = {}
+    context_dict['imageUrl'] = i.imageUrl
+    context_dict['heading'] = i.heading
+    context_dict['name'] = name
+    return render(request,'main/newTemplate/author/iherzog/index.html' , context_dict)
 
 def post(request,uid):
     i = details.objects.get_or_create(uid = uid)[0]
