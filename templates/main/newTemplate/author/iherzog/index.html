@@ -9,7 +9,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="profile" href="http://gmpg.org/xfn/11">
-        <title>Author name</title> <!-- jinja -->
+        <title>{{ name }}</title> <!-- jinja -->
 <link rel='dns-prefetch' href='http://fonts.googleapis.com/' />
 <link rel='dns-prefetch' href='http://s.w.org/' />
 <link rel="alternate" type="application/rss+xml" title="Narratium &raquo; Feed" href="../../feed/index.html" />
@@ -151,12 +151,12 @@ img.emoji {
             <div class="padding-both-50">
 
                 <div class="padding-bottom-10">
-                  <img alt='Vishrut kohli' src="{% static 'assetsNew/wp-content/uploads/2017/10/Vishrut.jpg' %}" srcset= "{% static 'assetsNew/wp-content/uploads/2017/10/Vishrut.jpg' %}" class='avatar border-radius-100 avatar-150 photo border-radius-100 md-whiteframe-3dp' height='150' width='150' />    <!-- Jinja -->
+                  <img alt='Vishrut kohli' src="{{ imageUrl }}" srcset="{{ imageUrl }}" class='avatar border-radius-100 avatar-150 photo border-radius-100 md-whiteframe-3dp' height='150' width='150' />    <!-- Jinja -->
                               </div>
                 <div class="site-typeface-title padding-bottom-5 typo-size-big basic-sideheader-title user-sideheader-title typo-size-xlarge">
-                  Vishrut Kohli             </div> <!-- Jinja -->
+                  {{ name }}             </div> <!-- Jinja -->
                 <div class="site-typeface-headline padding-bottom-10 typo-size-small basic-sideheader-subtitle user-sideheader-subtitle">
-                  <p>jabar lekhak</p> <!-- Jinja -->
+                  <p>{{ heading }}</p> <!-- Jinja -->
                 </div>
 
                 <div>

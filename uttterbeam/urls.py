@@ -8,7 +8,7 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'main.views.index2', name = 'index2'),
-    url(r'^author$', 'main.views.author', name = 'author'),
+    url(r'^author/(?P<name>[\*\w\-]+)$', 'main.views.authorF', name = 'author'),
     # url(r'^post$', 'main.views.post', name = 'post'),
     url(r'^login$', 'main.views.login', name = 'login'),
     url(r'^upload$', 'main.views.upload', name = 'upload'),
