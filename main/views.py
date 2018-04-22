@@ -1,10 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from main.models import details , author
+from main.models import Author_detail , write_up
 import base64
 import json
 import requests
-from uuid import uuid4 as uuid
 from slugify import slugify
 
 
@@ -14,19 +13,19 @@ def index(request):
     return render(request,'main/newTemplate/index.html')
 
 def authorF(request,name):
-    i = author.objects.get_or_create(name = name)[0]
+    i = Author_detail.objects.get_or_create(name = name)[0]
     context_dict = {}
-    context_dict['imageUrl'] = i.imageUrl
-    context_dict['heading'] = i.heading
+    context_dict['imageUrl'] = i.image_url
+    context_dict['heading'] = i.description
     context_dict['name'] = name
     return render(request,'main/newTemplate/author/iherzog/index.html' , context_dict)
 
 def post(request,uid):
-    i = details.objects.get_or_create(uid = uid)[0]
+    i = write_up.objects.get_or_create(url = uid)[0]
     context_dict = {}
-    context_dict['backgroundThumb'] = i.imageUrl
+    context_dict['backgroundThumb'] = i.image_url
     context_dict['heading'] = i.heading
-    context_dict['subText'] = i.subText
+    context_dict['subText'] = i.sub_text
     context_dict['writeup'] = i.writeup
     return render(request,'main/newTemplate/story/index.html',context_dict)
 
@@ -37,26 +36,25 @@ def upload(request):
     return render(request,'main/upload.html')
 
 def index2(request):
-    dataInfo = details.objects.all()
+    dataInfo = write_up.objects.all()
     context_dict = {}
     array = []
     for i in dataInfo:
         data = {}
-        data['backgroundThumb'] = i.imageUrl
-        data['backgroundLarge'] = i.imageUrl
-        data['url'] = "post/" + str(i.uid)
+        data['backgroundThumb'] = i.image_url
+        data['backgroundLarge'] = i.image_url
+        data['url'] = "post/" + str(i.url)
         data['heading'] = i.heading
-        data['subText'] = i.subText
+        data['subText'] = i.sub_text
         author = ['Alex' , 'Zack']
         data['author'] = author
+        data['id'] = str(i.post_id)
+        data['id2'] = "button-behaviour md-whiteframe-10dp post-item post-" + str(i.post_id) + " post type-post status-publish format-standard has-post-thumbnail hentry category-hacking category-internet category-technology"
+        data['id3'] = "card-post-" + str(i.post_id)
+        data['id4'] = "card-content site-palette-yang-1-color height-40vw width-100 min-height-500px max-height-800px link-white-color card-post site-palette-yang-1-color backdrop-dark-gradient-light ktt-backgroundy card-post-" + str(i.post_id) + "-content"
+        data['id5'] = "#card-post-" + str(i.post_id)
         array.append(data)
-        data['id'] = str(i.idd)
-        data['id2'] = "button-behaviour md-whiteframe-10dp post-item post-" + str(i.idd) + " post type-post status-publish format-standard has-post-thumbnail hentry category-hacking category-internet category-technology"
-        data['id3'] = "card-post-" + str(i.idd)
-        data['id4'] = "card-content site-palette-yang-1-color height-40vw width-100 min-height-500px max-height-800px link-white-color card-post site-palette-yang-1-color backdrop-dark-gradient-light ktt-backgroundy card-post-" + str(i.idd) + "-content"
-        data['id5'] = "#card-post-" + str(i.idd)
 
-    objectCount = details.objects.all().count()
     context_dict['data'] = array
     # print context_dict
     return render(request,'main/newTemplate/index2.html',context_dict)
@@ -71,22 +69,24 @@ def uploadWriteup(request):
     api_key = '37ee388bf32de161bb82e3852124c0af4ae40f19'
 
 
-    ids = details.objects.all().order_by('id')
-    # print max(ids)
-    idd = int(str(max(ids))) + 1
-    newInstance = details.objects.get_or_create(idd = str(idd))[0]
 
     writeup = request.POST['comment']
     # print writeup
-    newInstance.writeup = writeup
     
     heading = request.POST['author']
     # print heading
-    newInstance.heading = heading
 
-    urlText = str(heading).strip() + '-' + str(idd)
+    
+
+
+    # url = slugify(urlText)
+
+    newInstance = write_up.objects.get_or_create(heading = heading)[0]
+    newInstance.writeup = writeup
+    # newInstance.heading = heading
+    urlText = str(heading).strip() + '-' + str(newInstance.post_id)
     url = slugify(urlText)
-    newInstance.uid = url
+    newInstance.url = url
     
     url = "https://api.imgur.com/3/upload.json"
     image = request.FILES.get('file', None)
@@ -106,7 +106,7 @@ def uploadWriteup(request):
     # print j1
     img = json.loads(j1.text)["data"]["link"]
     # print img
-    newInstance.imageUrl = img
+    newInstance.image_url = img
     newInstance.save()
     return HttpResponse("your file was uploaded successfully")
             

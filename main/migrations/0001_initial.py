@@ -11,13 +11,31 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='details',
+            name='Author_detail',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=150, null=True, blank=True)),
+                ('description', models.CharField(max_length=350, null=True, blank=True)),
+                ('image_url', models.CharField(max_length=200, null=True, blank=True)),
+                ('author_id', models.AutoField(serialize=False, primary_key=True)),
+                ('twitter', models.CharField(max_length=150, null=True, blank=True)),
+                ('facebook', models.CharField(max_length=150, null=True, blank=True)),
+                ('instagram', models.CharField(max_length=150, null=True, blank=True)),
+                ('pinterest', models.CharField(max_length=150, null=True, blank=True)),
+                ('blogs', models.CharField(max_length=250, null=True, blank=True)),
+                ('url', models.CharField(max_length=150, null=True, blank=True)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='post',
+            fields=[
+                ('url', models.CharField(max_length=150, null=True, blank=True)),
+                ('post_id', models.AutoField(serialize=False, primary_key=True)),
                 ('heading', models.CharField(max_length=150, null=True, blank=True)),
-                ('subText', models.CharField(max_length=150, null=True, blank=True)),
+                ('sub_text', models.CharField(max_length=150, null=True, blank=True)),
                 ('writeup', models.CharField(max_length=1500, null=True, blank=True)),
-                ('imageUrl', models.CharField(max_length=200, null=True, blank=True)),
+                ('image_url', models.CharField(max_length=200, null=True, blank=True)),
+                ('upvotes', models.IntegerField(null=True, blank=True)),
+                ('author', models.ForeignKey(to='main.Author_detail')),
             ],
         ),
     ]
