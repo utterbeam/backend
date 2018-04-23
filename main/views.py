@@ -198,7 +198,7 @@ def facebook_login(request):
     context_dict['name'] = name
 
     print context_dict
-    return render(request,'main/newTemplate/after_login.html')
+    return render(request,'main/newTemplate/after_login.html' , context_dict)
 
 
 
