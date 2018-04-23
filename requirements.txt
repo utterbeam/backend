@@ -4,4 +4,5 @@ python-slugify
 requests
 whitenoise
 dj-database-url
+psycopg2==2.6.1
 
