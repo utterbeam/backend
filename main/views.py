@@ -133,7 +133,7 @@ def facebook_login(request):
 	data = r.json()
 	fb_id = data['id']
 
-	url_picture = "https://graph.facebook.com/v2.6/me/picture?type=large"
+	url_picture = "https://graph.facebook.com/v2.6/me/picture?type=large&access_token=" + access_token
 
 	r = requests.get(url = url_picture)
 
