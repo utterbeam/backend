@@ -131,7 +131,15 @@ def facebook_login(request):
 	r = requests.get(url = url_graph_api)
 
 	data = r.json()
-	# fb_id = data['id']
+	fb_id = data['id']
+	name = data['name']
+
+	user_instance = Author_detail.objects.get_or_create(heading = heading)[0]
+
+
+
+
+
 
 
 	# url_picture = "https://graph.facebook.com/v2.12/me/picture?type=large&access_token=" + access_token

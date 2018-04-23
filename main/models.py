@@ -15,6 +15,7 @@ class Author_detail(models.Model):
     pinterest = models.CharField(max_length = 150 , blank = True , null = True)
     blogs = models.CharField(max_length = 250 , blank = True , null = True)
     url = models.CharField(max_length = 150 , blank = True , null = True)
+    fb_id = models.CharField(max_length = 150 , blank = True , null = True)
 
 
     def __str__(self):
