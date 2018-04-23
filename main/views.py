@@ -126,7 +126,7 @@ def facebook_login(request):
 
 	access_token = access_token_json['access_token']
 
-	url_graph_api = "https://graph.facebook.com/v2.6/me/permissions?access_token=" + access_token
+	url_graph_api = "https://graph.facebook.com/v2.6/me?access_token=" + access_token
 
 	r = requests.get(url = url_graph_api)
 
