@@ -10,7 +10,27 @@ from slugify import slugify
 # Create your views here.
 
 def index(request):
-    return render(request,'main/newTemplate/index.html')
+	data_info = write_up.objects.all()
+    context_dict = {}
+    array = []
+    for i in data_info:
+        data = {}
+        data['backgroundThumb'] = i.image_url
+        data['backgroundLarge'] = i.image_url
+        data['url'] = "post/" + str(i.url)
+        data['heading'] = i.heading
+        data['subText'] = i.sub_text
+        author = ['Alex' , 'Zack']
+        data['author'] = author
+        data['id'] = str(i.post_id)
+        data['id2'] = "button-behaviour md-whiteframe-10dp post-item post-" + str(i.post_id) + " post type-post status-publish format-standard has-post-thumbnail hentry category-hacking category-internet category-technology"
+        data['id3'] = "card-post-" + str(i.post_id)
+        data['id4'] = "card-content site-palette-yang-1-color height-40vw width-100 min-height-500px max-height-800px link-white-color card-post site-palette-yang-1-color backdrop-dark-gradient-light ktt-backgroundy card-post-" + str(i.post_id) + "-content"
+        data['id5'] = "#card-post-" + str(i.post_id)
+        array.append(data)
+
+    context_dict['data'] = array
+    return render(request,'main/newTemplate/after_login.html')
 
 def authorF(request,name):
     i = Author_detail.objects.get_or_create(name = name)[0]
@@ -36,10 +56,10 @@ def upload(request):
     return render(request,'main/upload.html')
 
 def index2(request):
-    dataInfo = write_up.objects.all()
+    data_info = write_up.objects.all()
     context_dict = {}
     array = []
-    for i in dataInfo:
+    for i in data_info:
         data = {}
         data['backgroundThumb'] = i.image_url
         data['backgroundLarge'] = i.image_url
@@ -130,13 +150,15 @@ def facebook_login(request):
 
 	r = requests.get(url = url_graph_api)
 
-	data = r.json()
-	fb_id = data['id']
-	name = data['name']
+	user_data_json = r.json()
+	fb_id = user_data_json['id']
+	name = user_data_json['name']
 
 	user_instance = Author_detail.objects.get_or_create(fb_id = fb_id)[0]
 	user_instance.name = name
 	user_instance.save()
+
+	
 
 
 
@@ -152,7 +174,29 @@ def facebook_login(request):
 	
 
 
-	return HttpResponse(str(data))
+	data_info = write_up.objects.all()
+    context_dict = {}
+    array = []
+    for i in data_info:
+        data = {}
+        data['backgroundThumb'] = i.image_url
+        data['backgroundLarge'] = i.image_url
+        data['url'] = "post/" + str(i.url)
+        data['heading'] = i.heading
+        data['subText'] = i.sub_text
+        author = ['Alex' , 'Zack']
+        data['author'] = author
+        data['id'] = str(i.post_id)
+        data['id2'] = "button-behaviour md-whiteframe-10dp post-item post-" + str(i.post_id) + " post type-post status-publish format-standard has-post-thumbnail hentry category-hacking category-internet category-technology"
+        data['id3'] = "card-post-" + str(i.post_id)
+        data['id4'] = "card-content site-palette-yang-1-color height-40vw width-100 min-height-500px max-height-800px link-white-color card-post site-palette-yang-1-color backdrop-dark-gradient-light ktt-backgroundy card-post-" + str(i.post_id) + "-content"
+        data['id5'] = "#card-post-" + str(i.post_id)
+        array.append(data)
+
+    context_dict['data'] = array
+    context_dict['fb_id'] = fb_id
+    context_dict['name'] = name
+    return render(request,'main/newTemplate/after_login.html')
 
 
 
