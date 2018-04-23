@@ -196,6 +196,8 @@ def facebook_login(request):
     context_dict['data'] = array
     context_dict['fb_id'] = fb_id
     context_dict['name'] = name
+
+    print context_dict
     return render(request,'main/newTemplate/after_login.html')
 
 
