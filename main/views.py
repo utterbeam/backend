@@ -131,19 +131,18 @@ def facebook_login(request):
 	r = requests.get(url = url_graph_api)
 
 	data = r.json()
-	fb_id = data['id']
+	# fb_id = data['id']
 
-	url_picture = "https://graph.facebook.com/v2.12/me/picture?type=large&access_token=" + access_token
 
-	r = requests.get(url = url_picture)
-	x = x.encode('utf8')
-	# print r.text
-	x = str(r.text)
+	# url_picture = "https://graph.facebook.com/v2.12/me/picture?type=large&access_token=" + access_token
+
+	# r = requests.get(url = url_picture)
+
 	# x = x.encode('utf8')
 	
 
 
-	return HttpResponse(str(r.text))
+	return HttpResponse(str(data))
 
 
 
