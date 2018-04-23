@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='post',
+            name='write_up',
             fields=[
                 ('url', models.CharField(max_length=150, null=True, blank=True)),
                 ('post_id', models.AutoField(serialize=False, primary_key=True)),
@@ -35,7 +35,6 @@ class Migration(migrations.Migration):
                 ('writeup', models.CharField(max_length=1500, null=True, blank=True)),
                 ('image_url', models.CharField(max_length=200, null=True, blank=True)),
                 ('upvotes', models.IntegerField(null=True, blank=True)),
-                ('author', models.ForeignKey(to='main.Author_detail')),
             ],
         ),
     ]
