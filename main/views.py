@@ -115,7 +115,7 @@ def facebook_login(request):
 	# https://www.facebook.com/v2.12/dialog/oauth?client_id=190043084948279&redirect_uri=https://utterbeam.herokuapp.com/login&state="{st=state123abc,ds=123456789}"
 
 	code = request.GET.get('code')
-	print code
+	# print code
 
 
 	return HttpResponse(str(code))
