@@ -137,7 +137,8 @@ def facebook_login(request):
 
 	r = requests.get(url = url_picture)
 	# print r.text
-
+	x = str(r.text)
+	x = x.encode('utf8')
 	
 
 
