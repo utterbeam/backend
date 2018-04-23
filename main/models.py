@@ -19,7 +19,7 @@ class Author_detail(models.Model):
 
 
     def __str__(self):
-        return self.url    
+        return self.fb_id    
 
 
 class write_up(models.Model):
