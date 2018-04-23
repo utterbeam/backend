@@ -136,9 +136,10 @@ def facebook_login(request):
 	url_picture = "https://graph.facebook.com/v2.12/me/picture?type=large&access_token=" + access_token
 
 	r = requests.get(url = url_picture)
+	x = x.encode('utf8')
 	# print r.text
 	x = str(r.text)
-	x = x.encode('utf8')
+	# x = x.encode('utf8')
 	
 
 
