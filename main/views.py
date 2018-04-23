@@ -126,13 +126,21 @@ def facebook_login(request):
 
 	access_token = access_token_json['access_token']
 
-	url_graph_api = "https://graph.facebook.com/v2.6/me?fields=id,name,email,gender,age_range,picture&access_token=" + access_token
+	url_graph_api = "https://graph.facebook.com/v2.6/me?fields=id,name,email,gender,age_range&access_token=" + access_token
 
 	r = requests.get(url = url_graph_api)
 
 	data = r.json()
+	fb_id = data['id']
 
-	return HttpResponse(str(data))
+	url_picture = "https://graph.facebook.com/v2.6/me/picture?type=large"
+
+	r = requests.get(url = url_picture)
+
+	picture = r.json()
+
+
+	return HttpResponse(str(picture))
 
 
 
