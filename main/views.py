@@ -10,7 +10,7 @@ from slugify import slugify
 # Create your views here.
 
 def index(request):
-	# data_info = write_up.objects.all()
+    # data_info = write_up.objects.all()
  #    context_dict = {}
  #    array = []
  #    for i in data_info:
@@ -132,49 +132,49 @@ def uploadWriteup(request):
             
 def facebook_login(request):
 
-	# https://www.facebook.com/v2.12/dialog/oauth?client_id=190043084948279&redirect_uri=https://utterbeam.herokuapp.com/login&state="{st=state123abc,ds=123456789}"
+    # https://www.facebook.com/v2.12/dialog/oauth?client_id=190043084948279&redirect_uri=https://utterbeam.herokuapp.com/login&state="{st=state123abc,ds=123456789}"
 
-	code = request.GET.get('code')
-	# print code
+    code = request.GET.get('code')
+    # print code
 
-	url = "https://graph.facebook.com/v2.12/oauth/access_token?client_id=190043084948279&redirect_uri=https://utterbeam.herokuapp.com/login&client_secret=41f955c328dfe25ef060e95db961c176&code=" + code
-
-
-	r = requests.get(url = url)
-
-	access_token_json = r.json()
-
-	access_token = access_token_json['access_token']
-
-	url_graph_api = "https://graph.facebook.com/v2.12/me?fields=id,name,email,gender,age_range&access_token=" + access_token
-
-	r = requests.get(url = url_graph_api)
-
-	user_data_json = r.json()
-	fb_id = user_data_json['id']
-	name = user_data_json['name']
-
-	user_instance = Author_detail.objects.get_or_create(fb_id = fb_id)[0]
-	user_instance.name = name
-	user_instance.save()
-
-	
+    url = "https://graph.facebook.com/v2.12/oauth/access_token?client_id=190043084948279&redirect_uri=https://utterbeam.herokuapp.com/login&client_secret=41f955c328dfe25ef060e95db961c176&code=" + code
 
 
+    r = requests.get(url = url)
+
+    access_token_json = r.json()
+
+    access_token = access_token_json['access_token']
+
+    url_graph_api = "https://graph.facebook.com/v2.12/me?fields=id,name,email,gender,age_range&access_token=" + access_token
+
+    r = requests.get(url = url_graph_api)
+
+    user_data_json = r.json()
+    fb_id = user_data_json['id']
+    name = user_data_json['name']
+
+    user_instance = Author_detail.objects.get_or_create(fb_id = fb_id)[0]
+    user_instance.name = name
+    user_instance.save()
+
+    
 
 
 
 
 
-	# url_picture = "https://graph.facebook.com/v2.12/me/picture?type=large&access_token=" + access_token
-
-	# r = requests.get(url = url_picture)
-
-	# x = x.encode('utf8')
-	
 
 
-	data_info = write_up.objects.all()
+    # url_picture = "https://graph.facebook.com/v2.12/me/picture?type=large&access_token=" + access_token
+
+    # r = requests.get(url = url_picture)
+
+    # x = x.encode('utf8')
+    
+
+
+    data_info = write_up.objects.all()
     context_dict = {}
     array = []
     for i in data_info:
