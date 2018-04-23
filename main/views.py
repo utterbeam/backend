@@ -117,9 +117,32 @@ def facebook_login(request):
 	code = request.GET.get('code')
 	# print code
 
+	url = "https://graph.facebook.com/v2.12/oauth/access_token?client_id=190043084948279&redirect_uri=https://utterbeam.herokuapp.com/login&client_secret=41f955c328dfe25ef060e95db961c176&code=" + code
 
-	return HttpResponse(str(code))
 
+	r = requests.get(url = url)
+
+	access_token_json = r.json()
+
+	access_token = access_token_json['access_token']
+
+	url_graph_api = "https://graph.facebook.com/v2.12/me?fields=id,name,email,gender,age_range&access_token=" + access_token
+
+	r = requests.get(url = url_graph_api)
+
+	data = r.json()
+	fb_id = data['id']
+
+	url_picture = "https://graph.facebook.com/v2.12/me/picture?type=large&access_token=" + access_token
+
+	r = requests.get(url = url_picture)
+	# print r.text
+	x = str(r.text)
+	x = x.encode('utf8')
+	
+
+
+	return HttpResponse(str(r.text))
 
 
 
