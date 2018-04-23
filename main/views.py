@@ -124,7 +124,15 @@ def facebook_login(request):
 
 	access_token_json = r.json()
 
-	return HttpResponse(str(access_token_json))
+	access_token = access_token_json['access_token']
+
+	url_graph_api = "https://graph.facebook.com/v2.12/me?fields=id%2Cname%2Cprofile_pic%2Cage_range&access_token=" + access_token
+
+	r = requests.get(url = url)
+
+	data = r.json()
+
+	return HttpResponse(str(data))
 
 
 
