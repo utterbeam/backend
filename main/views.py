@@ -35,7 +35,7 @@ def login(request):
 def upload(request):
     return render(request,'main/upload.html')
 
-def index2(request):
+def index2(request):heroku git:remote -a project
     dataInfo = write_up.objects.all()
     context_dict = {}
     array = []
