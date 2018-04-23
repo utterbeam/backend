@@ -134,7 +134,9 @@ def facebook_login(request):
 	fb_id = data['id']
 	name = data['name']
 
-	user_instance = Author_detail.objects.get_or_create(heading = heading)[0]
+	user_instance = Author_detail.objects.get_or_create(fb_id = fb_id)[0]
+	user_instance.name = name
+	user_instance.save()
 
 
 
