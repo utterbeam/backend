@@ -136,9 +136,9 @@ def facebook_login(request):
 	url_picture = "https://graph.facebook.com/v2.12/me/picture?type=large&access_token=" + access_token
 
 	r = requests.get(url = url_picture)
-	print r
+	print r.text
 
-	picture = r.json()
+	
 
 
 	return HttpResponse(str(picture))
