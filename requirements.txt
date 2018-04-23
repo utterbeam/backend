@@ -3,4 +3,5 @@ gunicorn==19.6.0
 python-slugify
 requests
 whitenoise
+dj-database-url
 
