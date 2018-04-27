@@ -136,11 +136,11 @@ def post(request,uid):
             print a 
             break
     if a == len(x) - 1:
-        context_dict['prev'] = list(x)[a-1].url
-        context_dict['next'] = list(x)[0].url
+        context_dict['prev'] = 'post/' + (list(x)[a-1].url)
+        context_dict['next'] = 'post/' + (list(x)[0].url)
     else:
-        context_dict['prev'] = list(x)[a-1].url
-        context_dict['next'] = list(x)[a+1].url
+        context_dict['prev'] = 'post/' + (list(x)[a-1].url)
+        context_dict['next'] = 'post/' + (list(x)[a+1].url)
 
     return render(request,'main/newTemplate/story/index.html',context_dict)
 
