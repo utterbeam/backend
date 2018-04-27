@@ -110,7 +110,7 @@ def post(request,uid):
     context_dict['time'] = time
 
     user_instance = User.objects.get(username = username)
-      = write_up.objects.filter(user = user_instance)
+    author_writeups = write_up.objects.filter(user = user_instance)
     array = []
 
 
