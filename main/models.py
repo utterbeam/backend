@@ -46,6 +46,8 @@ class write_up(models.Model):
     writeup = models.CharField(max_length = 1500 , blank = True , null = True)
     image_url = models.CharField(max_length = 200 , blank = True , null = True)
     upvotes = models.IntegerField(blank = True , null = True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     # author = models.ForeignKey(Author_detail, on_delete=models.CASCADE)
 
     def __str__(self):

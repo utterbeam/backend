@@ -104,14 +104,7 @@ img.emoji {
     </md-button>
 
     
-    <span
- 
-    class="ng-cloak menu-handle cursor-pointer button-behaviour display-inline-block box-shadow site-menu-handle-open padding-left-20 padding-right-10 text-size-base position-relative site-palette-yin-2-color site-palette-yang-4-background-color border-radius-4">
-      <i class="ng-search material-icons">search</i>
-      <span class="ng-search">Search</span>
-
-      <input class="search">
-    </span>
+    
 
     
 
@@ -125,6 +118,25 @@ img.emoji {
         data-layout-sm="column"
         data-layout-xs="column"
         class="site-wrap">
+
+        <div data-layout-padding class="header-menu-wrap min-width-300px position-fixed top-0 left-0 z-index-20">
+
+      
+    <md-button
+    id="open-site-menu"
+    md-no-ink
+    aria-label="Menu"
+        ng-href="/"    style="background-image:url({% static 'assetsNew/wp-content/uploads/2017/10/cropped-Logo-150x150.png' %});background-position:center center;background-size:cover"
+    class="button-behaviour site-menu-handle-open site-logo-button md-fab site-palette-yang-1-color site-palette-yang-1-background-color" >
+    </md-button>
+
+    
+    
+
+    
+
+    
+    </div>
 
 
 
@@ -178,18 +190,18 @@ img.emoji {
 
                     <!-- Posted                                          in <b><a href="../category/hacking/index.html" rel="category tag">Hacking</a></b>, <b><a href="../category/internet/index.html" rel="category tag">Internet</a></b>, <b><a href="../category/technology/index.html" rel="category tag">Technology</a></b> -->
                     
-                                          on October 4, 2017                                    </span>
+                                          {{ date }}                                  </span>
                 
 
 
                                 <span class="meta opacity-08 ornament-line-before-amper">
-                  <span class="disqus-comment-count"> 2 Comments</span>
+                  <span class="disqus-comment-count"> {{upvotes}} upvotes</span>
                 </span>
                 
 
 
                                 <span class="meta opacity-05 ornament-line-before-amper">
-                  3 min read                </span>
+                  {{time}} min read                </span>
                 
 
                 
@@ -317,7 +329,7 @@ img.emoji {
 
 	{% for item in data %}
 
-	<li><a href="index.html">{{ item.heading }}</a><time datetime="2017-10-04T15:55:16+00:00" class="wp-block-latest-posts__post-date">October 4, 2017</time></li>
+	<li><a href="index.html">{{ item.heading }}</a><time datetime="2017-10-04T15:55:16+00:00" class="wp-block-latest-posts__post-date">{{date}}</time></li>
 
 	{% endfor %}
 

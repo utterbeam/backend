@@ -151,7 +151,7 @@ img.emoji {
             <div class="padding-both-50">
 
                 <div class="padding-bottom-10">
-                  <img alt='Vishrut kohli' src="{{ imageUrl }}" srcset="{{ imageUrl }}" class='avatar border-radius-100 avatar-150 photo border-radius-100 md-whiteframe-3dp' height='150' width='150' />    <!-- Jinja -->
+                  <img alt='{{name }}' src="{{ imageUrl }}" srcset="{{ imageUrl }}" class='avatar border-radius-100 avatar-150 photo border-radius-100 md-whiteframe-3dp' height='150' width='150' />    <!-- Jinja -->
                               </div>
                 <div class="site-typeface-title padding-bottom-5 typo-size-big basic-sideheader-title user-sideheader-title typo-size-xlarge">
                   {{ name }}             </div> <!-- Jinja -->
@@ -211,18 +211,21 @@ img.emoji {
                     title="Algorithms Supercharged Gerrymandering. We Should Use Them to Fix it."
                     href="../../{{ item.url }}"
                     class="classic-link padding-top-30 site-palette-yin-2-color display-block padding-bottom-5 site-typeface-title typo-size-xxlarge post-title">
-                      {{item.heading}}                  </a></p> <!-- Jinja -->
+                      {{item.heading}}      </a></p>  <p>{{item.date}}</p> <!-- Jinja -->
 
                                         <h2 class="typo-weight-300 site-palette-yin-3-color padding-top-5 padding-bottom-10 site-typeface-headline typo-size-medium post-subtitle">
-                      {{item.subtext}}                   </h2>
+                      {{item.subText}}                   </h2>
+                     
                     
-                    <p>{{item.wrtieup}} [&hellip;]</p><!-- Jinja -->
+                    <p>{{item.writeup}} [&hellip;]</p><!-- Jinja -->
+
 
                     <p><a
                     title="Algorithms Supercharged Gerrymandering. We Should Use Them to Fix it."
                     href="../../{{ item.url }}"
                     class="classic-link padding-top-10 site-palette-special-1-color"><!-- Jinja -->
-                      Continue reading                    </a></p>
+                        Continue reading                    </a></p>
+
 
                     <div class="padding-both-30"></div>
                     <hr class="site-palette-yang-4-border-color">

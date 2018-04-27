@@ -268,11 +268,15 @@ img.emoji {
               <p> A writers <strong>paradise</strong>.</p>
             </div>
 
+
           <hr class="opacity-01">   
 
           <div class="link-white-color  padding-top-5 padding-bottom-5 typo-size-small menu-site-menu-container">
         
         {% if user.is_authenticated %}
+        <div class="padding-bottom-10">
+                  <a href="/author/{{ user.username }}"><img alt='{{name }}' src="{{ imageUrl }}" srcset="{{ imageUrl }}" class='avatar border-radius-100 avatar-150 photo border-radius-100 md-whiteframe-3dp' height='150' width='150' /> </a>   <!-- Jinja -->
+                              </div>
         <h3>welcome! {{ user.first_name }}</h3>
 
          <div class="menu-frontpage-sidebar-menu-container"><ul id="menu-frontpage-sidebar-menu" class="frontpage-extra-menu  margin-auto display-inline"><li id="menu-item-428" ><i class="material-icons">edit</i><a href="/upload">  post your writeups</a></li> 
@@ -406,7 +410,7 @@ img.emoji {
             <div class="max-width-400px margin-auto word-wrap-break-word typo-size-medium site-typeface-title padding-left-10 padding-right-10 typo-size-subtitle padding-bottom-20">
              <p class="name">  {{ item.heading }}   </p></div>
             <div class="max-width-400px margin-auto site-typeface-headline opacity-05 padding-left-10 padding-right-10 text-size-small">
-              {{ item.subText }}         </div>
+              {{ item.subText }}  [&hellip;]       </div>
         </a>
 
 
@@ -448,12 +452,12 @@ img.emoji {
 
                       <span data-flex="50">
 
-              2 responses
+             {{item.date}}
             </span>
           
 
                       <span data-flex="50">
-              3 min read            </span>
+              {{item.time}} min read            </span>
           
         </div>
 

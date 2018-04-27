@@ -35,6 +35,34 @@ from django.contrib.auth.models import User
 #  #    context_dict['data'] = array
 #     return render(request,'main/newTemplate/after_login.html')
 
+
+
+WPM = 200
+WORD_LENGTH = 4
+
+import math
+
+
+
+def estimate_reading_time(texts):
+    # texts = extract_url(url)
+    filtered_text = len(texts)
+    total_words = math.ceil(filtered_text/WORD_LENGTH)
+    return  int(math.ceil(total_words/WPM))
+
+
+def subtext_generator(texts):
+    text_list = texts.split(' ')
+    text = ''
+
+    for i in range(20):
+        text = text + ' ' +text_list[i]
+    # texts = extract_url(url)
+    
+    return  text
+
+
+
 def authorF(request,username):
     user_instance = User.objects.get(username = username)
     i = Author_detail.objects.get_or_create(user = user_instance)[0]
@@ -52,7 +80,9 @@ def authorF(request,username):
         data['url'] = "post/" + str(i.url)
         data['heading'] = i.heading
         data['subText'] = i.sub_text
-        data['writeup'] = i.writeup       
+        data['date'] = i.created_at
+        data['writeup'] = i.writeup
+              
        
         array.append(data)
 
@@ -74,6 +104,9 @@ def post(request,uid):
     context_dict['author'] = i.user.first_name
     username = i.user.username
     context_dict['username'] = username
+    context_dict['date'] = i.created_at
+    time = estimate_reading_time(i.writeup)
+    context_dict['time'] = time
     
 
     user_instance = User.objects.get(username = username)
@@ -86,6 +119,7 @@ def post(request,uid):
         data['backgroundThumb'] = i.image_url
         data['backgroundLarge'] = i.image_url
         data['url'] = "post/" + str(i.url)
+        data['date'] = i.created_at
         data['heading'] = i.heading
         data['subText'] = i.sub_text
         data['writeup'] = i.writeup       
@@ -126,14 +160,24 @@ def index2(request):
         data['subText'] = i.sub_text
         data['username'] = i.user.username       
         data['author'] = i.user.first_name
+        data['date'] = i.created_at
         data['id'] = str(i.post_id)
         data['id2'] = "button-behaviour md-whiteframe-10dp post-item post-" + str(i.post_id) + " post type-post status-publish format-standard has-post-thumbnail hentry category-hacking category-internet category-technology"
         data['id3'] = "card-post-" + str(i.post_id)
         data['id4'] = "card-content site-palette-yang-1-color height-40vw width-100 min-height-500px max-height-800px link-white-color card-post site-palette-yang-1-color backdrop-dark-gradient-light ktt-backgroundy card-post-" + str(i.post_id) + "-content"
         data['id5'] = "#card-post-" + str(i.post_id)
+        time = estimate_reading_time(i.writeup)
+        data['time'] = time
         array.append(data)
 
     context_dict['data'] = array
+    print request.user
+    if str(request.user) != "AnonymousUser": 
+        user_instance = User.objects.get(username = request.user.username)
+        i = Author_detail.objects.get_or_create(user = user_instance)[0]
+
+        context_dict['imageUrl'] = i.image_url
+
     # print context_dict
     return render(request,'main/newTemplate/index2.html',context_dict)
 
@@ -167,6 +211,8 @@ def uploadWriteup(request):
     urlText = str(heading).strip() + '-' + str(newInstance.user.username)
     url = slugify(urlText)
     newInstance.url = url
+
+    newInstance.sub_text = subtext_generator(writeup)
     
     url = "https://api.imgur.com/3/upload.json"
     image = request.FILES.get('file', None)
@@ -323,6 +369,9 @@ def login(request):
         data['id3'] = "card-post-" + str(i.post_id)
         data['id4'] = "card-content site-palette-yang-1-color height-40vw width-100 min-height-500px max-height-800px link-white-color card-post site-palette-yang-1-color backdrop-dark-gradient-light ktt-backgroundy card-post-" + str(i.post_id) + "-content"
         data['id5'] = "#card-post-" + str(i.post_id)
+        time = estimate_reading_time(i.writeup)
+        data['time'] = time
+        data['date'] = i.created_at
         array.append(data)
 
     context_dict['data'] = array
@@ -457,6 +506,9 @@ def logout(request):
         data['id3'] = "card-post-" + str(i.post_id)
         data['id4'] = "card-content site-palette-yang-1-color height-40vw width-100 min-height-500px max-height-800px link-white-color card-post site-palette-yang-1-color backdrop-dark-gradient-light ktt-backgroundy card-post-" + str(i.post_id) + "-content"
         data['id5'] = "#card-post-" + str(i.post_id)
+        time = estimate_reading_time(i.writeup)
+        data['time'] = time
+        data['date'] = i.created_at
         array.append(data)
 
     context_dict['data'] = array
