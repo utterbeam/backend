@@ -195,7 +195,18 @@ img.emoji {
       <div id="users">
 	
 
-          <div data-layout-padding class="header-menu-wrap min-width-300px position-fixed top-0 left-0 z-index-20">
+          
+
+    
+        <div
+        id="site-wrap"
+        data-flex="auto"
+        data-layout="row"
+        data-layout-sm="column"
+        data-layout-xs="column"
+        class="site-wrap">
+
+        <div data-layout-padding class="header-menu-wrap min-width-300px position-fixed top-0 left-0 z-index-20">
 
       
     <md-button
@@ -220,15 +231,6 @@ img.emoji {
 
     
     </div>
-
-    
-        <div
-        id="site-wrap"
-        data-flex="auto"
-        data-layout="row"
-        data-layout-sm="column"
-        data-layout-xs="column"
-        class="site-wrap">
         <div
         id="basic-sideheader"
         data-flex
@@ -416,9 +418,9 @@ img.emoji {
         <div data-flex class="site-typeface-body typo-size-xsmall post-item-meta padding-left-30 padding-top-5 padding-bottom-5 padding-right-30" >
          
 
-          {% for a in item.author %}
-              <strong class="by-user"><a class="site-palette-yang-1-color" href="author/iwintheiser/index.html">{{ a }}</a></strong>
-          {% endfor %}
+          
+              <strong class="by-user"><a class="site-palette-yang-1-color" href="author/{{ item.username }}">{{ item.author }}</a></strong>
+       
           
         </div>
 

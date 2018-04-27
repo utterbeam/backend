@@ -14,7 +14,7 @@ urlpatterns = patterns('',
     
     url(r'^$', 'main.views.index2', name = 'home'),
     
-    url(r'^author/(?P<name>[\*\w\-]+)$', 'main.views.authorF', name = 'author'),
+    url(r'^author/(?P<username>[\*\w\-]+)$', 'main.views.authorF', name = 'author'),
     # url(r'^post$', 'main.views.post', name = 'post'),
     
     # url(r'^login$', 'main.views.facebook_login', name = 'fblogin'),

@@ -9,7 +9,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="profile" href="http://gmpg.org/xfn/11">
-        <title>post a writeup - author name</title> <!-- Jinja -->
+        <title>post a writeup - {{ name }}</title> <!-- Jinja -->
 
 <link rel='dns-prefetch' href='http://fonts.googleapis.com/' />
 <link rel='dns-prefetch' href='http://s.w.org/' />
@@ -95,7 +95,7 @@ img.emoji {
     id="open-site-menu"
     md-no-ink
     aria-label="Menu"
-        ng-href="#"    style="background-image:url({% static 'assetsNew/wp-content/uploads/2017/10/cropped-Logo-150x150.png' %});background-position:center center;background-size:cover"
+        ng-href="/"    style="background-image:url({% static 'assetsNew/wp-content/uploads/2017/10/cropped-Logo-150x150.png' %});background-position:center center;background-size:cover"
     class="button-behaviour site-menu-handle-open site-logo-button md-fab site-palette-yang-1-color site-palette-yang-1-background-color" >
     </md-button>
 
@@ -153,12 +153,12 @@ img.emoji {
             <div class="padding-both-50">
 
                 <div class="padding-bottom-10">
-                  <img alt='Vishrut kohli' src="{% static 'assetsNew/wp-content/uploads/2017/10/Vishrut.jpg' %}" srcset= "{% static 'assetsNew/wp-content/uploads/2017/10/Vishrut.jpg' %}" class='avatar border-radius-100 avatar-150 photo border-radius-100 md-whiteframe-3dp' height='150' width='150' />    <!-- Jinja -->
+                  <img alt='{{name }}' src="{{ imageUrl }}" srcset= "{{ imageUrl }}" class='avatar border-radius-100 avatar-150 photo border-radius-100 md-whiteframe-3dp' height='150' width='150' />    <!-- Jinja -->
                               </div>
                 <div class="site-typeface-title padding-bottom-5 typo-size-big basic-sideheader-title user-sideheader-title typo-size-xlarge">
-                  Vishrut Kohli             </div> <!-- Jinja -->
+                  {{name}}            </div> <!-- Jinja -->
                 <div class="site-typeface-headline padding-bottom-10 typo-size-small basic-sideheader-subtitle user-sideheader-subtitle">
-                  <p>jabar lekhak</p> <!-- Jinja -->
+                  <p>{{description}}</p> <!-- Jinja -->
                 </div>
 
                 <div>

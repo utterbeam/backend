@@ -99,7 +99,7 @@ img.emoji {
     id="open-site-menu"
     md-no-ink
     aria-label="Menu"
-        ng-href="#"    style="background-image:url({% static 'assetsNew/wp-content/uploads/2017/10/cropped-Logo-150x150.png' %});background-position:center center;background-size:cover"
+        ng-href="/"    style="background-image:url({% static 'assetsNew/wp-content/uploads/2017/10/cropped-Logo-150x150.png' %});background-position:center center;background-size:cover"
     class="button-behaviour site-menu-handle-open site-logo-button md-fab site-palette-yang-1-color site-palette-yang-1-background-color" >
     </md-button>
 
@@ -167,8 +167,8 @@ img.emoji {
 
 
                                                 <span class="meta opacity-08 ornament-line-before-amper">
-                    By                                          <strong class="by-user"><a class="site-palette-yang-1-color" href="../author/kohette/index.html">Rafael Martín</a></strong>
-                                          <strong class="by-user"><a class="site-palette-yang-1-color" href="../author/iwintheiser/index.html">Angie Harris</a></strong>
+                    By                                          <strong class="by-user"><a class="site-palette-yang-1-color" href="../author/{{ username }}">{{ author }}</a></strong>
+                                          
                                     </span>
                                 
 
@@ -176,7 +176,7 @@ img.emoji {
 
                                 <span class="meta opacity-05 ornament-line-before-amper">
 
-                    Posted                                          in <b><a href="../category/hacking/index.html" rel="category tag">Hacking</a></b>, <b><a href="../category/internet/index.html" rel="category tag">Internet</a></b>, <b><a href="../category/technology/index.html" rel="category tag">Technology</a></b>
+                    <!-- Posted                                          in <b><a href="../category/hacking/index.html" rel="category tag">Hacking</a></b>, <b><a href="../category/internet/index.html" rel="category tag">Internet</a></b>, <b><a href="../category/technology/index.html" rel="category tag">Technology</a></b> -->
                     
                                           on October 4, 2017                                    </span>
                 
@@ -210,6 +210,7 @@ img.emoji {
       <div data-hide-xs data-hide-sm class="nextprev-buttons post-item-meta  text-align-center" data-layout="row">
 
           <span data-flex="50">
+
 
                           <a class="site-palette-yang-1-color opacity-03 padding-top-20 padding-bottom-20 display-block"><span class="icon-left-open"></span> Previous</a>
             
@@ -312,12 +313,14 @@ img.emoji {
 
 <p>&nbsp;</p>
 
-<ul class="wp-block-latest-posts aligncenter is-grid columns-3"><li><a href="index.html">How Dreams of Spacefaring Zombies Led to the Launch of Sputnik.</a><time datetime="2017-10-04T15:55:16+00:00" class="wp-block-latest-posts__post-date">October 4, 2017</time></li>
-<li><a href="../algorithms-supercharged-gerrymandering-we-should-use-them-to-fix-it/index.html">Algorithms Supercharged Gerrymandering. We Should Use Them to Fix it.</a><time datetime="2017-10-04T15:50:47+00:00" class="wp-block-latest-posts__post-date">October 4, 2017</time></li>
-<li><a href="../5-years-cruising-the-world-they-still-living-the-dream/index.html">5 Years Cruising the World, They Still Living the Dream.</a><time datetime="2017-10-04T15:43:39+00:00" class="wp-block-latest-posts__post-date">October 4, 2017</time></li>
-<li><a href="../who-is-satoshi-nakamoto-the-creator-of-bitcoin/index.html">Who Is Satoshi Nakamoto, the Creator of Bitcoin?</a><time datetime="2017-10-04T15:38:39+00:00" class="wp-block-latest-posts__post-date">October 4, 2017</time></li>
-<li><a href="../how-humans-will-respond-to-immortality-an-interview-with-philosopher-john-fischer/index.html">How Humans Will Respond to Immortality: An Interview with Philosopher John Fischer.</a><time datetime="2017-10-04T15:32:37+00:00" class="wp-block-latest-posts__post-date">October 4, 2017</time></li>
-<li><a href="../the-nations-guaranteed-to-be-swallowed-by-the-sea/index.html">The Nations Guaranteed to Be Swallowed by the Sea.</a><time datetime="2017-10-04T15:29:56+00:00" class="wp-block-latest-posts__post-date">October 4, 2017</time></li>
+<ul class="wp-block-latest-posts aligncenter is-grid columns-3">
+
+	{% for item in data %}
+
+	<li><a href="index.html">{{ item.heading }}</a><time datetime="2017-10-04T15:55:16+00:00" class="wp-block-latest-posts__post-date">October 4, 2017</time></li>
+
+	{% endfor %}
+
 </ul>
                     <div class="clearfix  padding-both-30"></div>
 
@@ -394,73 +397,7 @@ img.emoji {
 
 
         
-<div id="comments-container" class="site-palette-yin-2-color  text-align-center site-palette-yang-3-background-color">
-<div id="comments" class="max-width-800px text-align-left comments-area padding-both-40 padding-bottom-40 margin-auto ">
 
-	
-
-
-				
-				<ol class="comment-list">
-							<li id="comment-14" class="comment even thread-even depth-1">
-			<article id="div-comment-14" class="comment-body">
-				<footer class="comment-meta">
-					<div class="comment-author vcard">
-						<img alt='' src='http://2.gravatar.com/avatar/ebd1a9369e7bcf7fb164c762fe794d82?s=70&amp;d=mm&amp;r=g' srcset='http://2.gravatar.com/avatar/ebd1a9369e7bcf7fb164c762fe794d82?s=140&#038;d=mm&#038;r=g 2x' class='avatar border-radius-100 avatar-70 photo' height='70' width='70' />						<b class="fn"><a href='http://gaylord.com/voluptas-voluptate-qui-libero-corrupti-aut-asperiores-corrupti-deserun' rel='external nofollow' class='url'>Mike Murazik</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
-
-					<div class="comment-metadata">
-						<a href="index.html#comment-14">
-							<time datetime="2017-10-04T16:01:22+00:00">
-								October 4, 2017 at 4:01 pm							</time>
-						</a>
-											</div><!-- .comment-metadata -->
-
-									</footer><!-- .comment-meta -->
-
-				<div class="comment-content">
-					<p>Qui sequi veniam laboriosam nulla architecto. Ipsam aperiam impedit nobis magnam iste.</p>
-<p>Et voluptas id reprehenderit. Labore qui molestiae ut et. Tempore perspiciatis vel consequuntur tempore. Cupiditate adipisci ex veritatis explicabo dolorem.</p>
-
-				</div><!-- .comment-content -->
-
-							</article><!-- .comment-body -->
-</li><!-- #comment-## -->
-		<li id="comment-29" class="comment odd alt thread-odd thread-alt depth-1">
-			<article id="div-comment-29" class="comment-body">
-				<footer class="comment-meta">
-					<div class="comment-author vcard">
-						<img alt='' src='http://0.gravatar.com/avatar/cbeb584f49b19d430a4736a6557984e0?s=70&amp;d=mm&amp;r=g' srcset='http://0.gravatar.com/avatar/cbeb584f49b19d430a4736a6557984e0?s=140&#038;d=mm&#038;r=g 2x' class='avatar border-radius-100 avatar-70 photo' height='70' width='70' />						<b class="fn"><a href='https://hand.info/nostrum-distinctio-qui-necessitatibus.htm' rel='external nofollow' class='url'>Sherwood Nolan DDS</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
-
-					<div class="comment-metadata">
-						<a href="index.html#comment-29">
-							<time datetime="2017-10-04T16:01:23+00:00">
-								October 4, 2017 at 4:01 pm							</time>
-						</a>
-											</div><!-- .comment-metadata -->
-
-									</footer><!-- .comment-meta -->
-
-				<div class="comment-content">
-					<p>Eveniet modi enim beatae est voluptatum. Debitis id cupiditate rerum voluptates accusamus velit eius.</p>
-<p>Libero omnis voluptatem ratione cum id vero soluta. Et rem tempora quisquam sunt in vero.</p>
-<p>Aut unde est id et. Modi vitae quasi expedita est. Voluptate minus consequuntur culpa atque et consequuntur. Corporis libero at quia ut. Odio et accusamus perspiciatis.</p>
-
-				</div><!-- .comment-content -->
-
-							</article><!-- .comment-body -->
-</li><!-- #comment-## -->
-				</ol><!-- .comment-list -->
-
-				
-			
-							<p class="no-comments text-align-center padding-both-40">Comments are closed.</p>
-			
-</div>
-<div class="padding-both-50"></div>
-</div>
-
-
-    </div>
 
 
 

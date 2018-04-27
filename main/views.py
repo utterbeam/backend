@@ -5,6 +5,8 @@ import base64
 import json
 import requests
 from slugify import slugify
+from django.contrib.auth.models import User
+
 
 
 
@@ -21,8 +23,8 @@ from slugify import slugify
 #  #        data['url'] = "post/" + str(i.url)
 #  #        data['heading'] = i.heading
 #  #        data['subText'] = i.sub_text
-#  #        author = ['Alex' , 'Zack']
-#  #        data['author'] = author
+        # author = ['Alex' , 'Zack']
+        # data['author'] = author
 #  #        data['id'] = str(i.post_id)
 #  #        data['id2'] = "button-behaviour md-whiteframe-10dp post-item post-" + str(i.post_id) + " post type-post status-publish format-standard has-post-thumbnail hentry category-hacking category-internet category-technology"
 #  #        data['id3'] = "card-post-" + str(i.post_id)
@@ -33,12 +35,33 @@ from slugify import slugify
 #  #    context_dict['data'] = array
 #     return render(request,'main/newTemplate/after_login.html')
 
-def authorF(request,name):
-    i = Author_detail.objects.get_or_create(name = name)[0]
+def authorF(request,username):
+    user_instance = User.objects.get(username = username)
+    i = Author_detail.objects.get_or_create(user = user_instance)[0]
     context_dict = {}
     context_dict['imageUrl'] = i.image_url
-    context_dict['heading'] = i.description
-    context_dict['name'] = name
+    context_dict['description'] = i.description
+    context_dict['name'] = i.user.first_name
+    author_writeups = write_up.objects.filter(user = user_instance)
+    array = []
+
+    for i in author_writeups:
+        data = {}
+        data['backgroundThumb'] = i.image_url
+        data['backgroundLarge'] = i.image_url
+        data['url'] = "post/" + str(i.url)
+        data['heading'] = i.heading
+        data['subText'] = i.sub_text
+        data['writeup'] = i.writeup       
+       
+        array.append(data)
+
+    print array
+    context_dict['data'] = array
+
+
+
+
     return render(request,'main/newTemplate/author/iherzog/index.html' , context_dict)
 
 def post(request,uid):
@@ -48,13 +71,42 @@ def post(request,uid):
     context_dict['heading'] = i.heading
     context_dict['subText'] = i.sub_text
     context_dict['writeup'] = i.writeup
+    context_dict['author'] = i.user.first_name
+    username = i.user.username
+    context_dict['username'] = username
+    
+
+    user_instance = User.objects.get(username = username)
+    author_writeups = write_up.objects.filter(user = user_instance)
+    array = []
+
+
+    for i in author_writeups:
+        data = {}
+        data['backgroundThumb'] = i.image_url
+        data['backgroundLarge'] = i.image_url
+        data['url'] = "post/" + str(i.url)
+        data['heading'] = i.heading
+        data['subText'] = i.sub_text
+        data['writeup'] = i.writeup       
+       
+        array.append(data)
+
+    print array
+    context_dict['data'] = array
     return render(request,'main/newTemplate/story/index.html',context_dict)
 
 # def login(request):
 #     return render(request,'main/login.html')
 
 def upload(request):
-    return render(request,'main/upload.html')
+    user_instance = User.objects.get(username = request.user.username)
+    i = Author_detail.objects.get_or_create(user = user_instance)[0]
+    context_dict = {}
+    context_dict['imageUrl'] = i.image_url
+    context_dict['description'] = i.description
+    context_dict['name'] = i.user.first_name
+    return render(request,'main/upload.html' , context_dict)
 
 
 from django.contrib.auth.decorators import login_required
@@ -72,8 +124,8 @@ def index2(request):
         data['url'] = "post/" + str(i.url)
         data['heading'] = i.heading
         data['subText'] = i.sub_text
-        author = ['Alex' , 'Zack']
-        data['author'] = author
+        data['username'] = i.user.username       
+        data['author'] = i.user.first_name
         data['id'] = str(i.post_id)
         data['id2'] = "button-behaviour md-whiteframe-10dp post-item post-" + str(i.post_id) + " post type-post status-publish format-standard has-post-thumbnail hentry category-hacking category-internet category-technology"
         data['id3'] = "card-post-" + str(i.post_id)
@@ -106,11 +158,13 @@ def uploadWriteup(request):
 
 
     # url = slugify(urlText)
-
-    newInstance = write_up.objects.get_or_create(heading = heading)[0]
+    user_instance = User.objects.get(username = request.user.username)
+    newInstance = write_up.objects.create(user = user_instance)
     newInstance.writeup = writeup
+    newInstance.heading = heading
+
     # newInstance.heading = heading
-    urlText = str(heading).strip() + '-' + str(newInstance.post_id)
+    urlText = str(heading).strip() + '-' + str(newInstance.user.username)
     url = slugify(urlText)
     newInstance.url = url
     
@@ -134,7 +188,36 @@ def uploadWriteup(request):
     # print img
     newInstance.image_url = img
     newInstance.save()
-    return HttpResponse("your file was uploaded successfully")
+    return redirect('home')
+
+
+def image_to_url_converter(image):
+
+    client_id = 'ad3002cdda698d8'
+    headers = {"Authorization": "Client-ID %s"%(client_id)}
+    # print headers
+    #file = cStringIO.StringIO(base64.b64decode(request.FILES['file1']))
+    api_key = '37ee388bf32de161bb82e3852124c0af4ae40f19'
+
+    url = "https://api.imgur.com/3/upload.json"
+    # image = request.FILES.get('file', None)
+    encoded_string = base64.b64encode(image.read())
+
+    j1 = requests.post(
+        url, 
+        headers = headers,
+        data = {
+            'key': api_key, 
+            'image': encoded_string,
+            'type': 'base64',
+            'name': '1.jpg',
+            'title': 'Picture no. 1'
+        }
+    )
+    # print j1
+    image_url = json.loads(j1.text)["data"]["link"]
+    # print img
+    return image_url
             
 # def facebook_login(request):
 
@@ -190,7 +273,8 @@ def uploadWriteup(request):
 #         data['url'] = "post/" + str(i.url)
 #         data['heading'] = i.heading
 #         data['subText'] = i.sub_text
-#         author = ['Alex' , 'Zack']
+#         data['username'] = i.user.username       
+        # data['author'] = i.user.first_name
 #         data['author'] = author
 #         data['id'] = str(i.post_id)
 #         data['id2'] = "button-behaviour md-whiteframe-10dp post-item post-" + str(i.post_id) + " post type-post status-publish format-standard has-post-thumbnail hentry category-hacking category-internet category-technology"
@@ -232,8 +316,8 @@ def login(request):
         data['url'] = "post/" + str(i.url)
         data['heading'] = i.heading
         data['subText'] = i.sub_text
-        author = ['Alex' , 'Zack']
-        data['author'] = author
+        data['username'] = i.user.username       
+        data['author'] = i.user.first_name
         data['id'] = str(i.post_id)
         data['id2'] = "button-behaviour md-whiteframe-10dp post-item post-" + str(i.post_id) + " post type-post status-publish format-standard has-post-thumbnail hentry category-hacking category-internet category-technology"
         data['id3'] = "card-post-" + str(i.post_id)
@@ -275,21 +359,79 @@ def login(request):
 
 from django.shortcuts import render, redirect
 
-from main.forms import SignUpForm
+from main.forms import SignUpForm , author_detail_form
+from django.shortcuts import  get_object_or_404
 
 def signup(request):
+    
     if request.method == 'POST':
         form = SignUpForm(request.POST)
+        details_form = author_detail_form(request.POST , request.FILES)
+
+        
         if form.is_valid():
-            form.save()
+            user_instance = form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
+            # profile = details_form.save(commit = False)
+
             user = authenticate(username=username, password=raw_password)
             auth_login(request, user)
+
+            # form = SignUpForm(request.POST)
+            instance = get_object_or_404(Author_detail, user=user)
+            
+
+            if details_form.is_valid():
+                print "entered author if"
+                # profile = author_detail.save(commit = False)
+                instance.description = details_form.cleaned_data.get('description')
+
+                # profile.user = user
+                # img_url = image_to_url_converter(request.FILES['file'])
+                # instance.image_url = img_url
+                # # # profile.description = description
+                # print "yoyoyo" + img_url
+                instance.save()
+
+
+                
+
+            else:
+                print "somethings wrong with the form"  
+
+
+
+            image =request.FILES.get('file')
+            # print "the image is " + (image)
+            img_url = image_to_url_converter(image)
+
+            instance.image_url = img_url
+            # # profile.description = description
+            print "yoyoyo" + img_url
+            instance.save()     
+
+
+
+
+            # profile.user = user
+            # # image = details_form.cleaned_data.get('image')
+            # # print image
+            # # profile.save()
+
+
+            # img_url = image_to_url_converter(request.FILES['image'])
+            # profile.image_url = img_url
+            # print img_url
+            # profile.save()
+            # registered = True
+            # profile = details_form.save(commit = False , instance=instance)
+            
             return redirect('home')
     else:
         form = SignUpForm()
-    return render(request, 'main/newTemplate/signup.html', {'form': form})
+        details_form = author_detail_form()
+    return render(request, 'main/newTemplate/signup.html', {'form': form ,'details_form': details_form })
 
 
     
@@ -308,8 +450,8 @@ def logout(request):
         data['url'] = "post/" + str(i.url)
         data['heading'] = i.heading
         data['subText'] = i.sub_text
-        author = ['Alex' , 'Zack']
-        data['author'] = author
+        data['username'] = i.user.username       
+        data['author'] = i.user.first_name
         data['id'] = str(i.post_id)
         data['id2'] = "button-behaviour md-whiteframe-10dp post-item post-" + str(i.post_id) + " post type-post status-publish format-standard has-post-thumbnail hentry category-hacking category-internet category-technology"
         data['id3'] = "card-post-" + str(i.post_id)
