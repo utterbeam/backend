@@ -273,7 +273,7 @@ img.emoji {
           <div class="link-white-color  padding-top-5 padding-bottom-5 typo-size-small menu-site-menu-container">
         
         {% if user.is_authenticated %}
-        <h3>welcome! {{ user.username }}</h3>
+        <h3>welcome! {{ user.first_name }}</h3>
 
          <div class="menu-frontpage-sidebar-menu-container"><ul id="menu-frontpage-sidebar-menu" class="frontpage-extra-menu  margin-auto display-inline"><li id="menu-item-428" ><i class="material-icons">edit</i><a href="/upload">  post your writeups</a></li> 
             <li id="menu-item-428" ><i class="material-icons">edit</i><a href="/logout">logout</a></li> 
