@@ -138,15 +138,15 @@ def post(request,uid):
             break
     if a == len(x) - 1:
         context_dict['prev'] = 'post/' + (list(x)[a-1].url)
-        context_dict['prev_name'] =  list(x)[a-1].url
+        context_dict['prev_name'] =  list(x)[a-1].heading
 
         context_dict['next'] = 'post/' + (list(x)[0].url)
-        context_dict['next_name'] = list(x)[0].url
+        context_dict['next_name'] = list(x)[0].heading
     else:
         context_dict['prev'] = 'post/' + (list(x)[a-1].url)
-        context_dict['prev_name'] = list(x)[a-1].url
+        context_dict['prev_name'] = list(x)[a-1].heading
         context_dict['next'] = 'post/' + (list(x)[a+1].url)
-        context_dict['next_name'] = list(x)[a+1].url
+        context_dict['next_name'] = list(x)[a+1].heading
 
     return render(request,'main/newTemplate/story/index.html',context_dict)
 
