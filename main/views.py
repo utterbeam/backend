@@ -60,8 +60,9 @@ def estimate_reading_time(texts):
 def subtext_generator(texts):
     text_list = texts.split(' ')
     text = ''
+    sub_text_words_len = int(math.ceil(len(text_list)/10))
 
-    for i in range(20):
+    for i in range(sub_text_words_len):
         text = text + ' ' +text_list[i]
     # texts = extract_url(url)
     
@@ -203,34 +204,23 @@ def uploadWriteup(request):
     api_key = '37ee388bf32de161bb82e3852124c0af4ae40f19'
     writeup = request.POST['comment']
     heading = request.POST['author']
+    sub_text = subtext_generator(writeup)
+    image = request.FILES.get('file', None)
+    img = image_to_url_converter(image)
+    print "yoyoy" + writeup
+
+    print heading
 
     user_instance = User.objects.get(username = request.user.username)
     newInstance = write_up.objects.create(user = user_instance)
     urlText = str(heading).strip() + '-' + str(newInstance.user.username)
     url = slugify(urlText)
-    newInstance = write_up.objects.create(user = user_instance)
     newInstance.writeup = writeup
     newInstance.heading = heading
     newInstance.url = url
-    newInstance.sub_text = subtext_generator(writeup)
+    newInstance.sub_text = sub_text
     
-    url = "https://api.imgur.com/3/upload.json"
-    image = request.FILES.get('file', None)
-    encoded_string = base64.b64encode(image.read())
-
-    j1 = requests.post(
-        url, 
-        headers = headers,
-        data = {
-            'key': api_key, 
-            'image': encoded_string,
-            'type': 'base64',
-            'name': '1.jpg',
-            'title': 'Picture no. 1'
-        }
-    )
-    # print j1
-    img = json.loads(j1.text)["data"]["link"]
+    
     # print img
     newInstance.image_url = img
     newInstance.save()
