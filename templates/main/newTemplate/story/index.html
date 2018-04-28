@@ -222,15 +222,16 @@ img.emoji {
       <div data-hide-xs data-hide-sm class="nextprev-buttons post-item-meta  text-align-center" data-layout="row">
 
           <span data-flex="50">
+          	<md-tooltip data-md-direction="top">{{prev_name}}</md-tooltip>
 
 
-                          <a class="site-palette-yang-1-color opacity-03 padding-top-20 padding-bottom-20 display-block" href="../{{ prev }}"><span class="icon-left-open"></span> Previous</a>
+                          <a class="site-palette-yang-1-color padding-top-20 padding-bottom-20 display-block" href="../{{ prev }}"><span class="icon-left-open"></span> Previous</a>
             
           </span>
 
           <span data-flex="50">
 
-                          <md-tooltip data-md-direction="top">Algorithms Supercharged Gerrymandering. We Should Use Them to Fix it.</md-tooltip>
+                          <md-tooltip data-md-direction="top">{{next_name}}</md-tooltip>
               <a
               class="site-palette-yang-1-color padding-top-20 padding-bottom-20 display-block"
               href="../{{ next }}">

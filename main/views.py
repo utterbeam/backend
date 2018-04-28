@@ -137,10 +137,15 @@ def post(request,uid):
             break
     if a == len(x) - 1:
         context_dict['prev'] = 'post/' + (list(x)[a-1].url)
+        context_dict['prev_name'] =  list(x)[a-1].url
+
         context_dict['next'] = 'post/' + (list(x)[0].url)
+        context_dict['next_name'] = list(x)[0].url
     else:
         context_dict['prev'] = 'post/' + (list(x)[a-1].url)
+        context_dict['prev_name'] = list(x)[a-1].url
         context_dict['next'] = 'post/' + (list(x)[a+1].url)
+        context_dict['next_name'] = list(x)[a+1].url
 
     return render(request,'main/newTemplate/story/index.html',context_dict)
 
@@ -198,7 +203,9 @@ def uploadWriteup(request):
     api_key = '37ee388bf32de161bb82e3852124c0af4ae40f19'
     writeup = request.POST['comment']
     heading = request.POST['author']
+
     user_instance = User.objects.get(username = request.user.username)
+    newInstance = write_up.objects.create(user = user_instance)
     urlText = str(heading).strip() + '-' + str(newInstance.user.username)
     url = slugify(urlText)
     newInstance = write_up.objects.create(user = user_instance)
