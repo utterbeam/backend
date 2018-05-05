@@ -16,7 +16,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from main.forms import login_form
-
+from plagiarism import crawlWeb , getBestMatchGoogle , getPlagiarismScore
 
 
 # Create your views here.
@@ -49,13 +49,8 @@ from main.forms import login_form
 def business(request):
     return render(request,'main/business.html')
 
-
-
-
 WPM = 200
 WORD_LENGTH = 4
-
-
 
 def estimate_reading_time(texts):
     # texts = extract_url(url)
@@ -211,13 +206,11 @@ def uploadWriteup(request):
     api_key = '37ee388bf32de161bb82e3852124c0af4ae40f19'
     writeup = request.POST['comment']
     heading = request.POST['author']
-    sub_text = subtext_generator(writeup)
+    score = getPlagiarismScore(writeup)
+    print(score)
+    sub_text = getPlagiarismScore(writeup)
     image = request.FILES.get('file', None)
     img = image_to_url_converter(image)
-    print "yoyoy" + writeup
-
-    print heading
-
     user_instance = User.objects.get(username = request.user.username)
     newInstance = write_up.objects.create(user = user_instance)
     urlText = str(heading).strip() + '-' + str(newInstance.user.username)
@@ -226,26 +219,17 @@ def uploadWriteup(request):
     newInstance.heading = heading
     newInstance.url = url
     newInstance.sub_text = sub_text
-    
-    
-    # print img
     newInstance.image_url = img
     newInstance.save()
     return redirect('home')
 
 
 def image_to_url_converter(image):
-
     client_id = 'ad3002cdda698d8'
     headers = {"Authorization": "Client-ID %s"%(client_id)}
-    # print headers
-    #file = cStringIO.StringIO(base64.b64decode(request.FILES['file1']))
     api_key = '37ee388bf32de161bb82e3852124c0af4ae40f19'
-
     url = "https://api.imgur.com/3/upload.json"
-    # image = request.FILES.get('file', None)
     encoded_string = base64.b64encode(image.read())
-
     j1 = requests.post(
         url, 
         headers = headers,
@@ -257,11 +241,8 @@ def image_to_url_converter(image):
             'title': 'Picture no. 1'
         }
     )
-    # print j1
     image_url = json.loads(j1.text)["data"]["link"]
-    # print img
     return image_url
-
 
 
 @login_required
