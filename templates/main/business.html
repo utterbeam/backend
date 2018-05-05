@@ -1,4 +1,6 @@
 <!doctype html>
+{% load staticfiles %}
+
 <html lang="en">
 
 
@@ -17,17 +19,17 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,300i,400,400i,500,500i,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400i" rel="stylesheet">
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'business/css/font-awesome.min.css' %}">
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'business/css/bootstrap.min.css' %}">
     <!-- Carousel -->
-    <link rel="stylesheet" href="css/carousel.css">
+    <link rel="stylesheet" href="{% static 'business/css/carousel.css' %}">
     <!-- nivo lightbox -->
-    <link rel="stylesheet" href="css/nivo-lightbox.css">
-    <link rel="stylesheet" href="css/nivo_themes/default/default.css">
+    <link rel="stylesheet" href="{% static 'business/css/nivo-lightbox.css' %}">
+    <link rel="stylesheet" href="{% static 'business/css/nivo_themes/default/default.css' %}">
     <!-- main css -->
-    <link rel="stylesheet" href="css/main.css">
-    <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    <link rel="stylesheet" href="{% static 'business/css/main.css' %}">
+    <script src="{% static 'business/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script>
 </head>
 
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
@@ -54,7 +56,7 @@
                         <!-- main title -->
                         <div class="col-md-12">
                             <h2>Why choose us</h2>
-                            <img src="img/title_line.png" alt="" />
+                            <img src="{% static 'business/img/title_line.png' %}" alt="" />
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                         </div>
                     </div>
@@ -66,7 +68,7 @@
                         <!-- PHONES IMAGE -->
                         <div class="col-md-6 reveal-left-fade">
                             <div class="phone-image">
-                                <img src="img/business-x-why-choose.png" alt="">
+                                <img src="{% static 'business/img/business-x-why-choose.png' %}" alt="">
                             </div>
                         </div>
                         <!-- RIGHT SIDE WITH BRIEF -->
@@ -101,7 +103,7 @@
                         <!-- main title -->
                         <div class="col-md-12">
                             <h2>Affordable Packages</h2>
-                            <img src="img/title_line.png" alt="" />
+                            <img src="{% static 'business/img/title_line.png' %}" alt="" />
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                         </div>
                     </div>
@@ -177,22 +179,22 @@
        
     
     <!-- jquery library -->
-    <script src="js/vendor/jquery-1.11.2.min.js"></script>
+    <script src="{% static 'business/js/vendor/jquery-1.11.2.min.js' %}"></script>
     <!-- Bootstrap  -->
-    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="{% static 'business/js/vendor/bootstrap.min.js' %}"></script>
     <!-- contact js -->
-    <script src="js/jquery-contact.js"></script>
+    <script src="{% static 'business/js/jquery-contact.js' %}"></script>
     <!-- retina js -->
-    <script src="js/retina.min.js"></script>
+    <script src="{% static 'business/js/retina.min.js' %}"></script>
     <!-- lightbox -->
-    <script src="js/nivo-lightbox.min.js"></script>
+    <script src="{% static 'business/js/nivo-lightbox.min.js' %}"></script>
     <!-- mailchimp -->
-    <script src="js/jquery.ajaxchimp.min.js"></script>
+    <script src="{% static 'business/js/jquery.ajaxchimp.min.js' %}"></script>
     <!-- scroll animatin JS -->
-    <script src="js/scrollreveal.min.js"></script>
-    <script src="js/plugins.js"></script>
+    <script src="{% static 'business/js/scrollreveal.min.js' %}"></script>
+    <script src="{% static 'business/js/plugins.js' %}"></script>
     <!-- Custom js -->
-    <script src="js/main.js"></script>
+    <script src="{% static 'business/js/main.js' %}"></script>
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
     (function(b, o, i, l, e, r) {

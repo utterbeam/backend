@@ -46,6 +46,12 @@ from main.forms import login_form
 
 
 
+def business(request):
+    return render(request,'main/business.html')
+
+
+
+
 WPM = 200
 WORD_LENGTH = 4
 

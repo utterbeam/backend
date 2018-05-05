@@ -34,6 +34,8 @@ urlpatterns = patterns('',
     url(r'^oauth/', include('social_django.urls', namespace='social')),
 
     url(r'^signup/$', 'main.views.signup', name='signup'),
+    
+    url(r'^business$', 'main.views.business', name = 'business'),
 
 
 
