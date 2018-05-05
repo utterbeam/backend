@@ -18,6 +18,7 @@ from django.contrib.auth import logout as auth_logout
 from main.forms import login_form
 
 
+
 # Create your views here.
 
 # def index(request):
@@ -408,6 +409,24 @@ def logout(request):
     context_dict['data'] = array
     # print context_dict
     return render(request,'main/newTemplate/index2.html',context_dict)
+
+
+# def plagarism(request): 
+
+#     # to check uniqui
+
+
+# def sentiment_analysis(request):
+
+#     # all sentiments to be detected via API .
+
+
+# from sklearn import logisticRegression
+# def hate_speech(request): 
+
+    #hatespeech , offesnive language and normal language classifier 
+
+ #freelance writing : outsourcing content writing
 
 
 
