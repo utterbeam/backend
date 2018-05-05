@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from main.models import Author_detail , write_up
+from main.models import Author_detail , write_up , keywords
 import base64
 import json
 import requests
@@ -16,8 +16,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from main.forms import login_form
-
-
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
@@ -417,6 +416,47 @@ def logout(request):
     return render(request,'main/newTemplate/index2.html',context_dict)
 
 
+def writer_allocation(request):
+    context_dict = {}
+    # print context_dict
+    return render(request,'main/newTemplate/writer_allocation.html',context_dict)
+
+
+@csrf_exempt
+@login_required
+def save_keywords(request):
+    
+    try:
+        ########################### EITHER YOU WILL HAVE YOUR POST REQUEST DATA IN REQUEST.BODY AND REQUEST.POST FROM WHERE YOU CAN PARSE it #######
+        x = json.loads(request.body)
+        print json.loads(request.body)
+        user_instance = User.objects.get(username = request.user.username)
+        author_instance = Author_detail.objects.get(user = user_instance)
+
+
+        for i in x:
+            print i 
+            keyword_instance = keywords.objects.get(name = i)
+            author_instance.keywords_selected.add(keyword_instance)
+        
+        author_instance.save()
+
+
+
+        # a = user.objects.get_or_create(hostname = x['hostname'])[0]
+        # a.hotspot = x['hotspot']
+        # a.save()
+
+        # u = v.djsessions_set.get_or_create()[0]
+
+        # u.hostedsession = x['hostedsession']
+        # u.save()
+
+            
+    except Exception as e:
+        print e
+        return HttpResponse("some error")
+    return HttpResponse("Post Succcessful")   
 # def plagarism(request): 
 
 #     # to check uniqui

@@ -37,6 +37,10 @@ urlpatterns = patterns('',
     
     url(r'^business$', 'main.views.business', name = 'business'),
 
+    url(r'^writer_allocation$', 'main.views.writer_allocation', name = 'writer_allocation'),
+
+    url(r'^save_keywords$', 'main.views.save_keywords', name = 'save_keywords'),
+
 
 
 )

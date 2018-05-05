@@ -7,6 +7,13 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
+
+class keywords(models.Model):
+    name = models.CharField(max_length = 150 , blank = True , null = True)
+    
+    def __str__(self):
+        return self.name
+
 class Author_detail(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     description = models.CharField(max_length = 350 , blank = True , null = True)
@@ -20,6 +27,7 @@ class Author_detail(models.Model):
     blogs = models.CharField(max_length = 250 , blank = True , null = True)
     url = models.CharField(max_length = 150 , blank = True , null = True)
     fb_id = models.CharField(max_length = 150 , blank = True , null = True)
+    keywords_selected = models.ManyToManyField(keywords , null = True)
 
 
     def __str__(self):
@@ -48,8 +56,13 @@ class write_up(models.Model):
     upvotes = models.IntegerField(blank = True , null = True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    # image_url = models.CharField(max_length = 200 , blank = True , null = True)
+    # image_url = models.CharField(max_length = 200 , blank = True , null = True)
+    # image_url = models.CharField(max_length = 200 , blank = True , null = True)
+    # image_url = models.CharField(max_length = 200 , blank = True , null = True)
+    keywords_selected = models.ManyToManyField(keywords , null = True)
+
     # author = models.ForeignKey(Author_detail, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.url
+
 
