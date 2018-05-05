@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from main.models import Author_detail , write_up
+from main.models import Author_detail , write_up , keywords
 import base64
 import json
 import requests
@@ -17,32 +17,9 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from main.forms import login_form
 from plagiarism import crawlWeb , getBestMatchGoogle , getPlagiarismScore
+from django.views.decorators.csrf import csrf_exempt
+from sentiment import calculateSentimentScores
 
-
-# Create your views here.
-
-# def index(request):
-#     # data_info = write_up.objects.all()
-#  #    context_dict = {}
-#  #    array = []
-#  #    for i in data_info:
-#  #        data = {}
-#  #        data['backgroundThumb'] = i.image_url
-#  #        data['backgroundLarge'] = i.image_url
-#  #        data['url'] = "post/" + str(i.url)
-#  #        data['heading'] = i.heading
-#  #        data['subText'] = i.sub_text
-        # author = ['Alex' , 'Zack']
-        # data['author'] = author
-#  #        data['id'] = str(i.post_id)
-#  #        data['id2'] = "button-behaviour md-whiteframe-10dp post-item post-" + str(i.post_id) + " post type-post status-publish format-standard has-post-thumbnail hentry category-hacking category-internet category-technology"
-#  #        data['id3'] = "card-post-" + str(i.post_id)
-#  #        data['id4'] = "card-content site-palette-yang-1-color height-40vw width-100 min-height-500px max-height-800px link-white-color card-post site-palette-yang-1-color backdrop-dark-gradient-light ktt-backgroundy card-post-" + str(i.post_id) + "-content"
-#  #        data['id5'] = "#card-post-" + str(i.post_id)
-#  #        array.append(data)
-
-#  #    context_dict['data'] = array
-#     return render(request,'main/newTemplate/after_login.html')
 
 
 
@@ -111,6 +88,10 @@ def post(request,uid):
     context_dict['date'] = i.created_at
     time = estimate_reading_time(i.writeup)
     context_dict['time'] = time
+    context_dict['plagiarism'] = i.plagiarism
+    context_dict['sentiment_positive'] = i.sentiment_positive
+    context_dict['sentiment_negative'] = i.sentiment_negative
+    context_dict['sentiment_neutral'] = i.sentiment_neutral
 
     user_instance = User.objects.get(username = username)
     author_writeups = write_up.objects.filter(user = user_instance)
@@ -206,20 +187,24 @@ def uploadWriteup(request):
     api_key = '37ee388bf32de161bb82e3852124c0af4ae40f19'
     writeup = request.POST['comment']
     heading = request.POST['author']
-    score = getPlagiarismScore(writeup)
-    print(score)
-    sub_text = getPlagiarismScore(writeup)
+    sub_text = subtext_generator(writeup)
     image = request.FILES.get('file', None)
     img = image_to_url_converter(image)
     user_instance = User.objects.get(username = request.user.username)
     newInstance = write_up.objects.create(user = user_instance)
     urlText = str(heading).strip() + '-' + str(newInstance.user.username)
     url = slugify(urlText)
+
     newInstance.writeup = writeup
     newInstance.heading = heading
     newInstance.url = url
     newInstance.sub_text = sub_text
     newInstance.image_url = img
+    newInstance.plagiarism = getPlagiarismScore(writeup)
+    sentiment = calculateSentimentScores(writeup)
+    newInstance.sentiment_positive = sentiment["pos"]
+    newInstance.sentiment_negative = sentiment["neg"]
+    newInstance.sentiment_neutral = sentiment["neu"]
     newInstance.save()
     return redirect('home')
 
@@ -398,6 +383,47 @@ def logout(request):
     return render(request,'main/newTemplate/index2.html',context_dict)
 
 
+def writer_allocation(request):
+    context_dict = {}
+    # print context_dict
+    return render(request,'main/newTemplate/writer_allocation.html',context_dict)
+
+
+@csrf_exempt
+@login_required
+def save_keywords(request):
+    
+    try:
+        ########################### EITHER YOU WILL HAVE YOUR POST REQUEST DATA IN REQUEST.BODY AND REQUEST.POST FROM WHERE YOU CAN PARSE it #######
+        x = json.loads(request.body)
+        print json.loads(request.body)
+        user_instance = User.objects.get(username = request.user.username)
+        author_instance = Author_detail.objects.get(user = user_instance)
+
+
+        for i in x:
+            print i 
+            keyword_instance = keywords.objects.get(name = i)
+            author_instance.keywords_selected.add(keyword_instance)
+        
+        author_instance.save()
+
+
+
+        # a = user.objects.get_or_create(hostname = x['hostname'])[0]
+        # a.hotspot = x['hotspot']
+        # a.save()
+
+        # u = v.djsessions_set.get_or_create()[0]
+
+        # u.hostedsession = x['hostedsession']
+        # u.save()
+
+            
+    except Exception as e:
+        print e
+        return HttpResponse("some error")
+    return HttpResponse("Post Succcessful")   
 # def plagarism(request): 
 
 #     # to check uniqui
@@ -487,6 +513,5 @@ def logout(request):
 
 #     print context_dict
 #     return render(request,'main/newTemplate/after_login.html' , context_dict)
-
 
 
