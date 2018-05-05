@@ -100,14 +100,7 @@ img.emoji {
     </md-button>
 
     
-    <span
- 
-    class="ng-cloak menu-handle cursor-pointer button-behaviour display-inline-block box-shadow site-menu-handle-open padding-left-20 padding-right-10 text-size-base position-relative site-palette-yin-2-color site-palette-yang-4-background-color border-radius-4">
-      <i class="ng-search material-icons">search</i>
-      <span class="ng-search">Search</span>
-
-      <input class="search">
-    </span>
+    
 
     
 
@@ -173,6 +166,24 @@ img.emoji {
                       ng-attr-target="_blank"
                       href="https://twitter.com/none"
                       class="typo-size-medium md-raised site-palette-yin-1-background-color md-fab icon-twitter">
+                      </md-button>
+                      <md-button
+                      aria-label="Facebook username"
+                      ng-attr-target="_blank"
+                      href="https://facebook.com/none"
+                      class="typo-size-medium md-raised site-palette-yin-1-background-color md-fab icon-instagram">
+                      </md-button>
+                      <!-- <md-button
+                      aria-label="Facebook username"
+                      ng-attr-target="_blank"
+                      href="https://facebook.com/none"
+                      class="typo-size-medium md-raised site-palette-yin-1-background-color md-fab icon-pinterest">
+                      </md-button>
+ -->                      <md-button
+                      aria-label="Facebook username"
+                      ng-attr-target="_blank"
+                      href="https://facebook.com/none"
+                      class="typo-size-medium md-raised site-palette-yin-1-background-color md-fab icon-mail">
                       </md-button>
                                       </div>
 
@@ -701,20 +712,20 @@ img.emoji {
 					*/
 					if ($scope.link_is_ajax_friendly(link_object)) {
 
-								/**
-								* We prevent the link from moving forward the load
-								*/
-								e.preventDefault();
+								// /**
+								// * We prevent the link from moving forward the load
+								// */
+								// e.preventDefault();
 
-								/**
-								* We capture the url
-								*/
-								var url = link_object.context.attributes.href.value;
+								// /**
+								// * We capture the url
+								// */
+								// var url = link_object.context.attributes.href.value;
 
-								/**
-								* We load the url with ajax
-								*/
-								$scope.load_ajax_url(url);
+								// /**
+								// * We load the url with ajax
+								// */
+								// $scope.load_ajax_url(url);
 
 					}
 

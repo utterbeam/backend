@@ -74,7 +74,42 @@ img.emoji {
 		<link rel="icon" href="{% static 'assetsNew/wp-content/uploads/2017/10/cropped-Logo-32x32.png' %}" sizes="32x32" />
 <link rel="icon" href="{% static 'assetsNew/wp-content/uploads/2017/10/favicon.ico' %}" sizes="32x32" />
 <link rel="apple-touch-icon-precomposed" href="{% static 'assetsNew/wp-content/uploads/2017/10/cropped-Logo-180x180.png' %}" />
-<meta name="msapplication-TileImage" content="http://kohette.com/wpthemes/narratium/wp-content/uploads/2017/10/cropped-Logo-270x270.png' %}" />
+<meta name="msapplication-TileImage" content="assetsNew/wp-content/uploads/2017/10/cropped-Logo-270x270.png' %}" />
+
+
+
+<!-- progressbar CSS -->
+
+ <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'>
+
+<style type="text/css">
+	
+	.tooltip{ 
+  position:relative;
+  float:right;
+}
+.tooltip > .tooltip-inner {background-color: #eebf3f; padding:5px 15px; color:rgb(23,44,66); font-weight:bold; font-size:13px;}
+.popOver + .tooltip > .tooltip-arrow {	border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 5px solid #eebf3f;}
+
+section{
+  margin:100px auto; 
+  height:1000px;
+}
+.progress{
+  border-radius:0;
+  overflow:visible;
+}
+.progress-bar{
+   background:rgb(23,44,60); 
+  -webkit-transition: width 1.5s ease-in-out;
+  transition: width 1.5s ease-in-out;
+}
+
+</style>
+
+
+
+
 
     </head>
     <body
@@ -82,6 +117,29 @@ img.emoji {
     data-layout="column"
     data-flex
     class="post-template-default single single-post postid-112 single-format-standard wp-custom-logo site-palette-yang-1-background-color site-palette-yin-1-color site-typeface-body">
+
+    <!-- progress bar js -->
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'></script>
+    <script type="text/javascript">
+    	
+
+    	$(function () { 
+  $('[data-toggle="tooltip"]').tooltip({trigger: 'manual'}).tooltip('show');
+});  
+
+// $( window ).scroll(function() {   
+ // if($( window ).scrollTop() > 10){  // scroll down abit and get the action   
+  $(".progress-bar").each(function(){
+    each_bar_width = $(this).attr('aria-valuenow');
+    $(this).width(each_bar_width + '%');
+  });
+       
+ //  }  
+// });
+
+
+    </script>
 
           <div id="loader" class="pageload-overlay" data-opening="M 0,0 80,-10 80,60 0,70 0,0" data-closing="M 0,-10 80,-20 80,-10 0,0 0,-10">
 				<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 80 60" preserveAspectRatio="none">
@@ -222,15 +280,18 @@ img.emoji {
       <div data-hide-xs data-hide-sm class="nextprev-buttons post-item-meta  text-align-center" data-layout="row">
 
           <span data-flex="50">
+          	<md-tooltip data-md-direction="top">{{prev_name}}</md-tooltip>
 
 
-                          <a class="site-palette-yang-1-color opacity-03 padding-top-20 padding-bottom-20 display-block" href="../{{ next }}"><span class="icon-left-open"></span> Previous</a>
+
+                          <a class="site-palette-yang-1-color padding-top-20 padding-bottom-20 display-block" href="../{{ prev }}"><span class="icon-left-open"></span> Previous</a>
+
             
           </span>
 
           <span data-flex="50">
 
-                          <md-tooltip data-md-direction="top">Algorithms Supercharged Gerrymandering. We Should Use Them to Fix it.</md-tooltip>
+                          <md-tooltip data-md-direction="top">{{next_name}}</md-tooltip>
               <a
               class="site-palette-yang-1-color padding-top-20 padding-bottom-20 display-block"
               href="../{{ prev }}">
@@ -301,6 +362,8 @@ img.emoji {
 			
 			
 		</style>
+
+
 		
 <p style="color:#313131;font-size:24px" class="has-drop-cap">{{ writeup }}</p>
 
@@ -313,6 +376,21 @@ img.emoji {
 <hr class="wp-block-separator" />
 
 
+<div class="progress">
+  <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" > hate speech 10 %</div>
+</div>
+<div class="progress">
+  <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+<div class="progress">
+  <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+<div class="progress">
+  <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+<div class="progress">
+  <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
 
 
 
@@ -366,7 +444,7 @@ img.emoji {
 
             <span data-flex>
 
-                              <span class="margin-left-5 display-block  opacity-03 padding-top-10 padding-left-20 padding-right-20 padding-bottom-10"><span class="icon-left-hand"></span> <span data-hide-xs>Previous</span></span>
+                              <span class="site-palette-yin-3-color margin-right-5 display-block padding-top-10 padding-left-20 padding-right-20 classic-link padding-bottom-10 " href="../{{prev}}"><span class="icon-left-hand"></span> <span data-hide-xs>Previous</span></span>
               
             </span>
 
@@ -386,8 +464,8 @@ img.emoji {
 
                               <a
                 class="site-palette-yin-3-color margin-right-5 display-block padding-top-10 padding-left-20 padding-right-20 classic-link padding-bottom-10 "
-                title="Algorithms Supercharged Gerrymandering. We Should Use Them to Fix it."
-                href="../algorithms-supercharged-gerrymandering-we-should-use-them-to-fix-it/index.html">
+              
+                href="../{{next}}">
                   <span data-hide-xs>Next</span> <span class="icon-right-hand"></span>
                 </a>
               
@@ -808,17 +886,17 @@ img.emoji {
 								/**
 								* We prevent the link from moving forward the load
 								*/
-								e.preventDefault();
+								// e.preventDefault();
 
-								/**
-								* We capture the url
-								*/
-								var url = link_object.context.attributes.href.value;
+								// /**
+								// * We capture the url
+								// */
+								// var url = link_object.context.attributes.href.value;
 
-								/**
-								* We load the url with ajax
-								*/
-								$scope.load_ajax_url(url);
+								// /**
+								// * We load the url with ajax
+								// */
+								// $scope.load_ajax_url(url);
 
 					}
 

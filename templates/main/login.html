@@ -186,7 +186,9 @@ img.emoji {
     data-flex
     class="home blog wp-custom-logo site-palette-yang-1-background-color site-palette-yin-1-color site-typeface-body" >
 
-          
+          <div
+        id="ajax"
+        >
       <div
         id="site-wrap"
         data-flex="auto"
@@ -674,20 +676,20 @@ img.emoji {
           */
           if ($scope.link_is_ajax_friendly(link_object)) {
 
-                /**
-                * We prevent the link from moving forward the load
-                */
-                e.preventDefault();
+                // /**
+                // * We prevent the link from moving forward the load
+                // */
+                // e.preventDefault();
 
-                /**
-                * We capture the url
-                */
-                var url = link_object.context.attributes.href.value;
+                // *
+                // * We capture the url
+                
+                // var url = link_object.context.attributes.href.value;
 
-                /**
-                * We load the url with ajax
-                */
-                $scope.load_ajax_url(url);
+                // /**
+                // * We load the url with ajax
+                // */
+                // $scope.load_ajax_url(url);
 
           }
 
@@ -908,7 +910,7 @@ img.emoji {
 var loader = new SVGLoader( document.getElementById( "loader" ), { speedIn : 500, easingIn : mina.easeinout } );
 </script>
 <script type='text/javascript' src="{% static 'assetsNew/wp-includes/js/wp-embed.min55fe.js?ver=4.9.5' %}"></script>
-</div></body>
+</div></div></body>
 
 <!-- Mirrored from kohette.com/wpthemes/narratium/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 07 Apr 2018 21:35:17 GMT -->
 </html>

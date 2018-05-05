@@ -18,6 +18,7 @@ from django.contrib.auth import logout as auth_logout
 from main.forms import login_form
 
 
+
 # Create your views here.
 
 # def index(request):
@@ -60,8 +61,9 @@ def estimate_reading_time(texts):
 def subtext_generator(texts):
     text_list = texts.split(' ')
     text = ''
+    sub_text_words_len = int(math.ceil(len(text_list)/10))
 
-    for i in range(20):
+    for i in range(sub_text_words_len):
         text = text + ' ' +text_list[i]
     # texts = extract_url(url)
     
@@ -137,10 +139,15 @@ def post(request,uid):
             break
     if a == len(x) - 1:
         context_dict['prev'] = 'post/' + (list(x)[a-1].url)
+        context_dict['prev_name'] =  list(x)[a-1].heading
+
         context_dict['next'] = 'post/' + (list(x)[0].url)
+        context_dict['next_name'] = list(x)[0].heading
     else:
         context_dict['prev'] = 'post/' + (list(x)[a-1].url)
+        context_dict['prev_name'] = list(x)[a-1].heading
         context_dict['next'] = 'post/' + (list(x)[a+1].url)
+        context_dict['next_name'] = list(x)[a+1].heading
 
     return render(request,'main/newTemplate/story/index.html',context_dict)
 
@@ -198,32 +205,23 @@ def uploadWriteup(request):
     api_key = '37ee388bf32de161bb82e3852124c0af4ae40f19'
     writeup = request.POST['comment']
     heading = request.POST['author']
+    sub_text = subtext_generator(writeup)
+    image = request.FILES.get('file', None)
+    img = image_to_url_converter(image)
+    print "yoyoy" + writeup
+
+    print heading
+
     user_instance = User.objects.get(username = request.user.username)
+    newInstance = write_up.objects.create(user = user_instance)
     urlText = str(heading).strip() + '-' + str(newInstance.user.username)
     url = slugify(urlText)
-    newInstance = write_up.objects.create(user = user_instance)
     newInstance.writeup = writeup
     newInstance.heading = heading
     newInstance.url = url
-    newInstance.sub_text = subtext_generator(writeup)
+    newInstance.sub_text = sub_text
     
-    url = "https://api.imgur.com/3/upload.json"
-    image = request.FILES.get('file', None)
-    encoded_string = base64.b64encode(image.read())
-
-    j1 = requests.post(
-        url, 
-        headers = headers,
-        data = {
-            'key': api_key, 
-            'image': encoded_string,
-            'type': 'base64',
-            'name': '1.jpg',
-            'title': 'Picture no. 1'
-        }
-    )
-    # print j1
-    img = json.loads(j1.text)["data"]["link"]
+    
     # print img
     newInstance.image_url = img
     newInstance.save()
@@ -411,6 +409,24 @@ def logout(request):
     context_dict['data'] = array
     # print context_dict
     return render(request,'main/newTemplate/index2.html',context_dict)
+
+
+# def plagarism(request): 
+
+#     # to check uniqui
+
+
+# def sentiment_analysis(request):
+
+#     # all sentiments to be detected via API .
+
+
+# from sklearn import logisticRegression
+# def hate_speech(request): 
+
+    #hatespeech , offesnive language and normal language classifier 
+
+ #freelance writing : outsourcing content writing
 
 
 
