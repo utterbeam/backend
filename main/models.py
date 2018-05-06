@@ -37,9 +37,10 @@ class Author_detail(models.Model):
 
 class employer_work(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='employer')
-    keywords_selected = models.ManyToManyField(keywords , null = True)
+    keywords_selected = models.ManyToManyField(keywords , null = True , related_name='keywords_selected')
     assigned_writer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='writer' ,null = True)
     work_description = models.CharField(max_length = 150 , blank = True , null = True)
+    matched_keyword = models.ManyToManyField(keywords , null = True , related_name='matched_keyword')
 
 
     def __str__(self):

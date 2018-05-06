@@ -590,13 +590,23 @@ kbd {
 </div>
 
 <div>
+  <ol>
 {% for item in array %}
+<li>
+<h2 style="color: white;">Work description :{{item.work_description}}</h2>
 
- <h2 style="color: white;"">{{item.work_description}}</h2><br>
+
+<h4 style="color: white;">Keywords Matched- {% for i in item.matched_keywords %},
+  {{ i }}
+ {% endfor %}
+ </h4>
+ <br>
+</li>
 
  {% endfor %}
+ <ol>
     
-
+ 
       <!-- <span class="display-block"><p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" required='required' /></p></span> -->
  
       

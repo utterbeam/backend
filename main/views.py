@@ -19,7 +19,7 @@ from main.forms import login_form
 from plagiarism import crawlWeb , getBestMatchGoogle , getPlagiarismScore
 from django.views.decorators.csrf import csrf_exempt
 from sentiment import calculateSentimentScores
-
+import numpy as np
 
 from django.core.urlresolvers import resolve
 
@@ -261,13 +261,9 @@ def login(request):
         data['time'] = time
         data['date'] = i.created_at
         array.append(data)
-
     context_dict['data'] = array
-
-
     form = login_form()
     context_dict['form'] = form
-
     error_message = ""
     if request.method == 'POST':
         username = request.POST['username']
@@ -281,14 +277,9 @@ def login(request):
             return redirect('home')
         else:
             error_message = "You are not a registered user please sign up"
-
             form = login_form()
-
             context_dict['form'] = form
             context_dict['error_message'] = error_message
-
-
-
     return render(request,'main/login.html' , context_dict)
 
     
@@ -400,36 +391,39 @@ def writer_allocation(request):
 @csrf_exempt
 @login_required
 def save_keywords(request):
-    
     try:
         ########################### EITHER YOU WILL HAVE YOUR POST REQUEST DATA IN REQUEST.BODY AND REQUEST.POST FROM WHERE YOU CAN PARSE it #######
         x = json.loads(request.body)
-        print json.loads(request.body)
+        # print json.loads(request.body)
         user_instance = User.objects.get(username = request.user.username)
         employer_instance = employer_work.objects.create(user = user_instance)
-        writer_instance = User.objects.get(username = "vishrutkohli") # to be changed by keyword extraction
+        writer = Author_detail.objects.all()
+        counter = 0
+        max = 0
+        for i in writer:
+            all_keywords = i.keywords_selected.all()
+            emp_keywords = x["array"]
+            for key in all_keywords:
+                for value in emp_keywords:
+                    if key.name == value:
+                        print('hiiiiiiiiiiiiiiiiiiiiiiiiiiiii')
+                        keyword_instance = keywords.objects.get(name = key.name)
+                        employer_instance.matched_keyword.add(keyword_instance)
+                        counter = counter + 1
+            print(counter)
+            if max<counter:
+                max = counter
+                username_matched = i
+            counter = 0
+        writer_instance = User.objects.get(username = username_matched)
         employer_instance.assigned_writer = writer_instance
         employer_instance.save()
-        
-
-
         for i in x["array"]:
-            print i 
             keyword_instance = keywords.objects.get(name = i)
             employer_instance.keywords_selected.add(keyword_instance)
-
-
         employer_instance.work_description = x['description']
         employer_instance.save()
-
-
-
-
-
-
-       
-
-            
+        print("Post Succcessful")
     except Exception as e:
         print e
         return HttpResponse("some error")
@@ -440,19 +434,17 @@ def save_keywords(request):
 def assigned_work(request):
     user_instance = User.objects.get(username = request.user.username)
     work = employer_work.objects.filter(assigned_writer = user_instance)
-    
     array = []
-
     for i in work:
         data = {}
         data['work_description'] = i.work_description
-        print i.work_description
+        matched_keywords = i.matched_keyword.all()
+        keywords = []
+        for i in matched_keywords:
+            keywords.append(i.name)
+        data['matched_keywords'] = keywords
+        print keywords
         array.append(data)
-
-
-
-
-
     context_dict = {}
     context_dict['array'] = array
     # print context_dict
