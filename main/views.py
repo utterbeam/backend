@@ -19,7 +19,7 @@ from main.forms import login_form
 from plagiarism import crawlWeb , getBestMatchGoogle , getPlagiarismScore
 from django.views.decorators.csrf import csrf_exempt
 from sentiment import calculateSentimentScores
-import numpy as np
+# import numpy as np
 
 from django.core.urlresolvers import resolve
 
