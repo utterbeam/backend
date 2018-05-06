@@ -6,4 +6,4 @@ whitenoise
 dj-database-url
 psycopg2
 social-auth-app-django
-
+bs4
