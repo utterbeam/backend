@@ -41,10 +41,13 @@ urlpatterns = patterns('',
 
     url(r'^save_keywords$', 'main.views.save_keywords', name = 'save_keywords'),
 
+    # url(r'^content_description$', 'main.views.content_description', name = 'content_description'),
+
+    # url(r'^content_description_save$', 'main.views.content_description_save', name = 'content_description_save'),
+    
+    url(r'^assigned_work$', 'main.views.assigned_work', name = 'assigned_work'),
+
 
 
 )
 
-LOGIN_URL = 'login'
-LOGOUT_URL = 'logout'
-LOGIN_REDIRECT_URL = 'home'

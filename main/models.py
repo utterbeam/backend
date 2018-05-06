@@ -31,7 +31,20 @@ class Author_detail(models.Model):
 
 
     def __str__(self):
-        return self.user.username    
+        return self.user.username   
+
+
+
+class employer_work(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='employer')
+    keywords_selected = models.ManyToManyField(keywords , null = True)
+    assigned_writer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='writer' ,null = True)
+    work_description = models.CharField(max_length = 150 , blank = True , null = True)
+
+
+    def __str__(self):
+        return self.user.username 
+
 
 
 @receiver(post_save, sender=User)

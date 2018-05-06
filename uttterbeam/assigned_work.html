@@ -585,40 +585,21 @@ kbd {
  background-color: black; ">
 	<div class="site-body-content-wrap min-height-100vh " data-flex data-layout="row" data-layout-wrap data-layout-align="center center">
 
-		<h1 style="color: #fff">What type of content you require ?</h1>
-		<br>
-		<h1 style="color: #fff">Enter some keywords</h1>
 		
-			<br>
+
+      <!-- <span class="display-block"><p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" required='required' /></p></span> -->
+      
+<!-- <span class="display-block"><p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="url" value="" size="30" maxlength="200" /></p></span>
+ -->
+        
+
+
 
 			<link rel="import" href="https://rawgit.com/sitepoint-editors/multiselect-web-component/master/src/multiselect.html">
 
 
 
-<section>
-	<br>
-  <h3>Please select options below(you can select multiple options)</h3>
-  <div id="container">
-  	
-    <x-multiselect placeholder="Select Value">
-      <li value="Block Chain"  style="color: #000000">Block Chain</li>
-      <li value="Artificial Intelligence" style="color: #000000">Artificial Intelligence</li>
-      <li value="Cooking" style="color: #000000">Cooking</li>
-      <li value="Fasion" style="color: #000000">Fasion</li>
-      <li value="Weight Loss"  style="color: #000000">Weight Loss</li>
-      <li value="Social media" style="color: #000000">Social media</li>
-      <li value="Travel" style="color: #000000">Travel</li>
-      
-    </x-multiselect>
-<div data-flex id="site-body" class="template-grid-default site-palette-yin-1-background-color site-palette-yang-4-color" style="
- background-color: black; ">
-<p class="comment-notes"><span id="email-notes">PLease give the description of the content to be written as specific as possible</span> and the assigned writer will be notified <span class="required">*</span></p><p class="comment-form-comment"><textarea class="site-palette-yin-2-color site-palette-yang-1-background-color border-radius-3 display-block width-100 padding-both-20" placeholder="Start typing" id="description" name="description" cols="45" rows="25" aria-required="true"></textarea></p>
-</div>
 
-<button type="submit" onclick="submitbutton()" style="color: black;">submit</button>
-
-  </div>
-</section>
 
 
 
@@ -638,37 +619,9 @@ kbd {
             jQuery( "#basic-sideheader" ).ktt_backgroundy();
         });
         </script>
-<script type="text/javascript">
 	
 
-	function submitbutton() {
 
-		
-
-		var multiselect = document.querySelector('x-multiselect');
-		console.log(multiselect.selectedItems())
-    var description = document.getElementById('description').value
-    console.log(document.getElementById('description').value)
-
-		var url = "/save_keywords";
-    var dict = {description:description, array:multiselect.selectedItems()};
-		var params = JSON.stringify(dict);
-		var xhr = new XMLHttpRequest();
-		xhr.open("POST", url, true);
-
-//Send the proper header information along with the request
-		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-		xhr.send(params);
-
-		location.href='/content_description'
-
-};
-               // The function returns the product of p1 and p2
-
-	
-	
-</script>
   
 
 

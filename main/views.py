@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from main.models import Author_detail , write_up , keywords
+from main.models import Author_detail , write_up , keywords , employer_work
 import base64
 import json
 import requests
@@ -19,6 +19,10 @@ from main.forms import login_form
 from plagiarism import crawlWeb , getBestMatchGoogle , getPlagiarismScore
 from django.views.decorators.csrf import csrf_exempt
 from sentiment import calculateSentimentScores
+
+
+from django.core.urlresolvers import resolve
+
 
 
 
@@ -271,6 +275,8 @@ def login(request):
         user = authenticate(username=request.POST['username'], password=request.POST['password'])
         if user is not None:
             auth_login(request, user)
+            current_url = resolve(request.path_info).url_name
+            print current_url
             # Redirect to a success page.
             return redirect('home')
         else:
@@ -383,6 +389,8 @@ def logout(request):
     return render(request,'main/newTemplate/index2.html',context_dict)
 
 
+
+@login_required
 def writer_allocation(request):
     context_dict = {}
     # print context_dict
@@ -398,32 +406,75 @@ def save_keywords(request):
         x = json.loads(request.body)
         print json.loads(request.body)
         user_instance = User.objects.get(username = request.user.username)
-        author_instance = Author_detail.objects.get(user = user_instance)
+        employer_instance = employer_work.objects.create(user = user_instance)
+        writer_instance = User.objects.get(username = "vishrutkohli") # to be changed by keyword extraction
+        employer_instance.assigned_writer = writer_instance
+        employer_instance.save()
+        
 
 
-        for i in x:
+        for i in x["array"]:
             print i 
             keyword_instance = keywords.objects.get(name = i)
-            author_instance.keywords_selected.add(keyword_instance)
-        
-        author_instance.save()
+            employer_instance.keywords_selected.add(keyword_instance)
+
+
+        employer_instance.work_description = x['description']
+        employer_instance.save()
 
 
 
-        # a = user.objects.get_or_create(hostname = x['hostname'])[0]
-        # a.hotspot = x['hotspot']
-        # a.save()
 
-        # u = v.djsessions_set.get_or_create()[0]
 
-        # u.hostedsession = x['hostedsession']
-        # u.save()
+
+       
 
             
     except Exception as e:
         print e
         return HttpResponse("some error")
     return HttpResponse("Post Succcessful")   
+
+
+@login_required
+def assigned_work(request):
+    user_instance = User.objects.get(username = request.user.username)
+    work = employer_work.objects.filter(assigned_writer = user_instance)
+    
+    array = []
+
+    for i in work:
+        data = {}
+        data['work_description'] = i.work_description
+        print i.work_description
+        array.append(data)
+
+
+
+
+
+    context_dict = {}
+    context_dict['array'] = array
+    # print context_dict
+    # return HttpResponse(array)
+    return render(request,'main/newTemplate/assigned_work.html',context_dict)
+
+
+# def content_description(request):
+#     context_dict = {}
+#     # print context_dict
+#     return render(request,'main/newTemplate/content_description.html',context_dict)    
+
+
+# def content_description_save(request):
+#     context_dict = {}
+#     # print context_dict
+#     description = request.POST['description']
+
+#     print description
+
+    
+#     return redirect('home')    
 # def plagarism(request): 
 
 #     # to check uniqui
